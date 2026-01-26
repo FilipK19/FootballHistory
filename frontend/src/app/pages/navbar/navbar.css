@@ -1,0 +1,6 @@
+.navbar{
+  position: relative;
+  display: flex;
+  gap: 12px;
+  height: 35px;
+}
