@@ -14,10 +14,22 @@ async def root():
 BASE_DIR = Path(__file__).resolve().parent
 JSON_FILE = BASE_DIR / "test.json"
 
+PremLeagueStandings24 = BASE_DIR / "pls.json"
+
 
 @app.get("/test")
 async def testapi():
     with open(JSON_FILE, "r", encoding="utf-8") as file:
+        data = json.load(file)
+    
+    return JSONResponse(
+        content=data,
+        status_code=200
+    )
+
+@app.get("/pl24")
+async def testapi():
+    with open(PremLeagueStandings24, "r", encoding="utf-8") as file:
         data = json.load(file)
     
     return JSONResponse(
