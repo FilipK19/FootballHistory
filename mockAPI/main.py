@@ -3,13 +3,22 @@ from fastapi import FastAPI
 import json
 from pathlib import Path
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:4200"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Hello from FastAPI!"}
 
 BASE_DIR = Path(__file__).resolve().parent
 JSON_FILE = BASE_DIR / "test.json"
