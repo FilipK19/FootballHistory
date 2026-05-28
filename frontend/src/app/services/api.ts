@@ -8,7 +8,7 @@ export class Api {
 
   constructor(private http: HttpClient) {}
 
-  getMessage() {
-    return this.http.get('http://localhost:8001');
-  }
+  getTable() {
+  return this.http.get('http://127.0.0.1:8001/pl24');
+}
 }

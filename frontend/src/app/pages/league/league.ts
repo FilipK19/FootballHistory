@@ -10,14 +10,17 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrl: './league.css',
 })
 export class League {
-  message: string = '';
+  table: any[] = [];
 
   constructor(private api: Api, private cd: ChangeDetectorRef) {}
 
-ngOnInit() {
-  this.api.getMessage().subscribe((data: any) => {
-    this.message = data.message;
-    this.cd.detectChanges();
-  });
+  ngOnInit() {
+    this.api.getTable().subscribe((data: any) => {
+      console.log(data);
+
+      this.table = data.response[0].league.standings[0];
+
+      this.cd.detectChanges();
+    });
   }
 }

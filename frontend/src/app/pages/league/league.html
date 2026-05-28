@@ -1,5 +1,7 @@
-<p>league works!</p>
 
-2
+<div *ngFor="let team of table">
+  <p>{{ team.rank }} - {{ team.team.name }}</p>
+  <p>Points: {{ team.points }}</p>
+</div>
 
-<p>{{ message }}</p>
+
