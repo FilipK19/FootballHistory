@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-leagues',
@@ -8,5 +9,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './leagues.css',
 })
 export class Leagues {
+
+  constructor(private router: Router) {}
+
+  goToPlayer() {
+  this.router.navigate(['/league', 'leagueId']);
+}
 
 }

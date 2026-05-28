@@ -8,7 +8,9 @@ export class Api {
 
   constructor(private http: HttpClient) {}
 
-  getTable() {
-  return this.http.get('http://127.0.0.1:8001/pl24');
+getTable(leagueId: number) {
+  return this.http.get(
+    `http://127.0.0.1:8001/league/${leagueId}`
+  );
 }
 }

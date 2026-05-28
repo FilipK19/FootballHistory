@@ -8,5 +8,5 @@ export const routes: Routes = [
     {path: '', component: Home},
     {path: 'temp', component: Temp},
     {path: 'leagues', component: Leagues},
-    {path: 'league', component: League}
+    {path: 'league/:leagueId', component: League}
 ];

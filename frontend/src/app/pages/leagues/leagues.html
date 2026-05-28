@@ -1,8 +1,8 @@
 
 <div class="buttons">
-    <button routerLink="/league">Premier League</button>
+    <button [routerLink]="['/league', 'premier-league']">Premier League</button>
 
-    <h1>La Liga</h1>
+    <button [routerLink]="['/league', 'bundesliga']">Bundesliga</button>
 
-    <h1>Bundesliga</h1>
+    <button [routerLink]="['/league', 'la-liga']">La Liga</button>
 </div>
