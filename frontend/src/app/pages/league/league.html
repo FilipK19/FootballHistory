@@ -1,8 +1,7 @@
 
-<div *ngFor="let team of table">
+@for (team of table(); track team.team.id) {
   <p>{{ team.rank }} - {{ team.team.name }}</p>
   <p>Points: {{ team.points }}</p>
-</div>
+}
 
 <p>League ID: {{ leagueId }}</p>
-

@@ -1,43 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-league',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './league.html',
   styleUrl: './league.css',
 })
 export class League implements OnInit {
-  table: any[] = [];
+
+  table = signal<any[]>([]);
   leagueId: string | null = '';
 
-  constructor(private api: Api, 
-    private cd: ChangeDetectorRef, 
-    private route: ActivatedRoute) {}
+  constructor(
+    private api: Api,
+    private route: ActivatedRoute
+  ) {}
 
 ngOnInit() {
-
-  const leagues: any = {
-    'premier-league': 'premier-league',
-    'bundesliga': 'bundesliga',
-    'la-liga': 'la-liga'
-  };
 
   this.route.paramMap.subscribe(params => {
 
     const leagueId = params.get('leagueId');
 
-    const apiLeague = leagues[leagueId || 'premier-league'];
+    if (!leagueId) return;
 
-    this.api.getTable(apiLeague).subscribe((data: any) => {
+    this.api.getTable(leagueId).subscribe((data: any) => {
 
-      this.table = data.response[0].league.standings[0];
+      this.table.set(
+        data.response[0].league.standings[0]
+      );
 
-      console.log('TABLE UPDATED:', this.table);
-      this.cd.detectChanges();
     });
 
   });
