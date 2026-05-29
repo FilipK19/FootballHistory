@@ -23,14 +23,20 @@ async def root():
 BASE_DIR = Path(__file__).resolve().parent
 JSON_FILE = BASE_DIR / "test.json"
 
-PremLeagueStandings24 = BASE_DIR / "pls.json"
-BundesligaStandings24 = BASE_DIR / "bun24.json"
+PremLeagueStandings24 = BASE_DIR / "pl_s24.json"
+BundesligaStandings24 = BASE_DIR / "bun_s24.json"
+LaLigaStandings24 = BASE_DIR / "laliga_s24.json"
+SerieAStandings24 = BASE_DIR / "seriea_s24.json"
+Ligue1Standings24 = BASE_DIR / "ligue1_s24.json"
 
 LEAGUE_FILES = {
     "premier-league": PremLeagueStandings24,
     "bundesliga": BundesligaStandings24,
-    "la-liga": BASE_DIR / "lal24.json"
+    "la-liga": LaLigaStandings24,
+    "serie-a": SerieAStandings24,
+    "ligue1": Ligue1Standings24
 }
+
 
 
 @app.get("/test")
@@ -43,15 +49,6 @@ async def testapi():
         status_code=200
     )
 
-#@app.get("/pl24")
-#async def testapi():
-#    with open(PremLeagueStandings24, "r", encoding="utf-8") as file:
-#        data = json.load(file)
-# 
-#    return JSONResponse(
-#        content=data,
-#        status_code=200
-#y    )
 
 @app.get("/league/{league_name}")
 async def get_league(league_name: str):
