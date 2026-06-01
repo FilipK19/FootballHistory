@@ -7,6 +7,6 @@ import { League } from './pages/league/league';
 export const routes: Routes = [
     {path: '', component: Home},
     {path: 'temp', component: Temp},
-    {path: 'leagues', component: Leagues},
-    {path: 'league/:leagueId', component: League}
+    {path: 'leagues/:seasonId', component: Leagues},
+    {path: 'league/:leagueId/:seasonId', component: League}
 ];

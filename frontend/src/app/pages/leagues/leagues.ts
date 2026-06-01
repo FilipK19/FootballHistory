@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-leagues',
@@ -9,4 +9,13 @@ import { RouterModule } from '@angular/router';
 })
 export class Leagues {
 
+  seasonId: string = '';
+
+  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.seasonId = params.get('seasonId') || '24';
+    });
+  }
 }

@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 import json
 from pathlib import Path
@@ -16,30 +16,21 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello from FastAPI!"}
 
 BASE_DIR = Path(__file__).resolve().parent
 JSON_FILE = BASE_DIR / "test.json"
 
-PremLeagueStandings24 = BASE_DIR / "pl_s24.json"
-BundesligaStandings24 = BASE_DIR / "bun_s24.json"
-LaLigaStandings24 = BASE_DIR / "laliga_s24.json"
-SerieAStandings24 = BASE_DIR / "seriea_s24.json"
-Ligue1Standings24 = BASE_DIR / "ligue1_s24.json"
-
-LEAGUE_FILES = {
-    "premier-league": PremLeagueStandings24,
-    "bundesliga": BundesligaStandings24,
-    "la-liga": LaLigaStandings24,
-    "serie-a": SerieAStandings24,
-    "ligue1": Ligue1Standings24
+# Mapping of league names to their corresponding codes used in file names
+LEAGUE_CODES = {
+    "premier-league": "pl",
+    "bundesliga": "bun",
+    "la-liga": "laliga",
+    "serie-a": "seriea",
+    "ligue1": "ligue1",
 }
 
 
-
-@app.get("/test")
+@app.get("/test") # basic test endpoint
 async def testapi():
     with open(JSON_FILE, "r", encoding="utf-8") as file:
         data = json.load(file)
@@ -50,21 +41,22 @@ async def testapi():
     )
 
 
-@app.get("/league/{league_name}")
-async def get_league(league_name: str):
+# Function returns the league table for a given league and season
+@app.get("/league/{league_name}/{season}")
+async def get_league(league_name: str, season: str):
 
-    file_path = LEAGUE_FILES.get(league_name)
+    league_code = LEAGUE_CODES.get(league_name)
 
-    if not file_path:
-        return JSONResponse(
-            content={"error": "League not found"},
-            status_code=404
-        )
+    if not league_code:
+        raise HTTPException(status_code=404, detail="League not found")
+
+    file_path = BASE_DIR / "data" / f"season{season}" / f"{league_code + '_s' + season}.json"
+    # file path of leagues
+
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Season not found")
 
     with open(file_path, "r", encoding="utf-8") as file:
         data = json.load(file)
 
-    return JSONResponse(
-        content=data,
-        status_code=200
-    )
+    return data

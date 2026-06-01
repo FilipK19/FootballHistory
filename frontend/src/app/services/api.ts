@@ -8,9 +8,10 @@ export class Api {
 
   constructor(private http: HttpClient) {}
 
-getTable(leagueId: string) {
-  return this.http.get(
-    `http://127.0.0.1:8001/league/${leagueId}`
-  );
-}
+  // Function to get the league table for a specific league and season
+  getTable(leagueId: string, seasonId: string) {
+    return this.http.get(
+      `http://127.0.0.1:8001/league/${leagueId}/${seasonId}`
+    );
+  }
 }
