@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-temp',
+  selector: 'app-season',
   imports: [RouterModule],
-  templateUrl: './temp.html',
-  styleUrl: './temp.css',
+  templateUrl: './season.html',
+  styleUrl: './season.css',
 })
-export class Temp {
+export class Season {
 
 }
