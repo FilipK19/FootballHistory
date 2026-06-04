@@ -60,3 +60,12 @@ async def get_league(league_name: str, season: str):
         data = json.load(file)
 
     return data
+
+
+@app.get("/matches/{league_name}/{season}")
+async def get_matches(league_name: str, season: str):
+    
+    return JSONResponse(
+        content={"message": f"Matches for {league_name} in season {season}"},
+        status_code=200
+    )

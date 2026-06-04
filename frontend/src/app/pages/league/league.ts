@@ -26,12 +26,12 @@ export class League implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
 
-      const leagueId = params.get('leagueId');
-      const seasonId = params.get('seasonId');
+      this.leagueId = params.get('leagueId');
+      this.seasonId = params.get('seasonId');
 
-      if (!leagueId || !seasonId) return;
+      if (!this.leagueId || !this.seasonId) return;
 
-      this.api.getTable(leagueId, seasonId).subscribe((data: any) => {
+      this.api.getTable(this.leagueId, this.seasonId).subscribe((data: any) => {
       this.table.set(data.response[0].league.standings[0]);
       });
 

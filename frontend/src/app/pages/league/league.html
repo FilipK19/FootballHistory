@@ -5,3 +5,7 @@
 }
 
 <p>League ID: {{ leagueId }}</p>
+
+<div class="buttons">
+    <button [routerLink]="['/league', leagueId, seasonId, 'matches']">Matches</button>
+</div>
