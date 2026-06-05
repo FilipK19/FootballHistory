@@ -1,3 +1,7 @@
+<div class="buttons">
+    <button [routerLink]="['/league', leagueId, seasonId, 'matches']">Matches</button>
+</div>
+
 
 @for (team of table(); track team.team.id) {
   <p>{{ team.rank }} - {{ team.team.name }}</p>
@@ -5,7 +9,3 @@
 }
 
 <p>League ID: {{ leagueId }}</p>
-
-<div class="buttons">
-    <button [routerLink]="['/league', leagueId, seasonId, 'matches']">Matches</button>
-</div>

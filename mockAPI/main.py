@@ -46,13 +46,11 @@ async def testapi():
 async def get_league(league_name: str, season: str):
 
     league_code = LEAGUE_CODES.get(league_name)
-
     if not league_code:
         raise HTTPException(status_code=404, detail="League not found")
 
     file_path = BASE_DIR / "data" / f"season{season}" / f"{league_code + '_s' + season}.json"
     # file path of leagues
-
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="Season not found")
 
@@ -64,8 +62,16 @@ async def get_league(league_name: str, season: str):
 
 @app.get("/matches/{league_name}/{season}")
 async def get_matches(league_name: str, season: str):
+
+    league_code = LEAGUE_CODES.get(league_name)
+    if not league_code:
+        raise HTTPException(status_code=404, detail="League not found")
     
-    return JSONResponse(
-        content={"message": f"Matches for {league_name} in season {season}"},
-        status_code=200
-    )
+    file_path = BASE_DIR / "data" / f"{league_code + '_matches' + season}.json"
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Season not found")
+    
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    return data
