@@ -49,7 +49,7 @@ async def get_league(league_name: str, season: str):
     if not league_code:
         raise HTTPException(status_code=404, detail="League not found")
 
-    file_path = BASE_DIR / "data" / f"season{season}" / f"{league_code + '_s' + season}.json"
+    file_path = BASE_DIR / "data" / f"season{season}" / "standings" / f"{league_code + '_s' + season}.json"
     # file path of leagues
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="Season not found")
@@ -67,7 +67,7 @@ async def get_matches(league_name: str, season: str):
     if not league_code:
         raise HTTPException(status_code=404, detail="League not found")
     
-    file_path = BASE_DIR / "data" / f"{league_code + '_matches' + season}.json"
+    file_path = BASE_DIR / "data" / f"season{season}" / "matches" / f"{league_code + '_matches' + season}.json"
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="Season not found")
     
