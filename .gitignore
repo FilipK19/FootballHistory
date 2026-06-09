@@ -1,0 +1,9 @@
+# environment variables
+**/.env
+
+# logs
+*.log
+
+# venv
+venv/
+.env/
