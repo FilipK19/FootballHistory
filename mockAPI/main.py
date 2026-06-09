@@ -70,25 +70,6 @@ async def testapi():
     )
 
 
-# Function returns the league table for a given league and season
-@app.get("/league/{league_name}/{season}")
-async def get_league(league_name: str, season: str):
-    
-    league = LEAGUE_BY_NAME.get(league_name)
-    league_code = league["code"]
-    if not league_code:
-        raise HTTPException(status_code=404, detail="League not found")
-
-    file_path = BASE_DIR / "data" / f"season{season}" / "standings" / f"{league_code + '_s' + season}.json"
-    # file path of leagues
-    if not file_path.exists():
-        raise HTTPException(status_code=404, detail="Season not found")
-
-    with open(file_path, "r", encoding="utf-8") as file:
-        data = json.load(file)
-
-    return data
-
 
 # Function returns the matches for a given league and season
 @app.get("/matches/{league_name}/{season}")
@@ -99,9 +80,12 @@ async def get_matches(league_name: str, season: str):
     if not league_code:
         raise HTTPException(status_code=404, detail="League not found")
     
-    file_path = BASE_DIR / "data" / f"season{season}" / "matches" / f"{league_code + '_matches' + season}.json"
+    season_short = str(season)[-2:]
+    
+    file_path = BASE_DIR / "data" / f"season{season_short}" / "matches" / f"{league_code + '_matches' + season_short}.json"
     if not file_path.exists():
         raise HTTPException(status_code=404, detail="Season not found")
+    print(f"Fetching matches from file: {file_path}")
     
     with open(file_path, "r", encoding="utf-8") as file:
         data = json.load(file)
@@ -110,15 +94,17 @@ async def get_matches(league_name: str, season: str):
 
 
 # Function returns the standings for a given league and season, with caching mechanism to avoid unnecessary API calls
-@app.get("/standings")
-async def get_standings(league: int, season: int):
+@app.get("/league/{league}/{season}")
+async def get_standings(league: str, season: int):
 
     headers = {
         "x-apisports-key": API_KEY
     }
 
-    league_id = LEAGUE_BY_ID.get(league)
+    league_id = LEAGUE_BY_NAME.get(league)
     league_code = league_id["code"]
+    if not league_code:
+        raise HTTPException(status_code=404, detail="League not found")
 
     season_short = str(season)[-2:]
 
@@ -129,7 +115,7 @@ async def get_standings(league: int, season: int):
             f"{BASE_URL}/standings",
             headers=headers,
             params={
-                "league": league,
+                "league": league_id["id"],
                 "season": season
             }
         )

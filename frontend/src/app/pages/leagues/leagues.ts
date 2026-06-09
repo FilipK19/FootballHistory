@@ -15,7 +15,7 @@ export class Leagues {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.seasonId = params.get('seasonId') || '24';
+      this.seasonId = params.get('seasonId') || '2024';
     });
   }
 }

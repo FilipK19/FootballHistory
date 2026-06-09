@@ -32,7 +32,7 @@ export class League implements OnInit {
       if (!this.leagueId || !this.seasonId) return;
 
       this.api.getTable(this.leagueId, this.seasonId).subscribe((data: any) => {
-      this.table.set(data.response[0].league.standings[0]);
+      this.table.set(data.data.response[0].league.standings[0]);
       });
 
     });
