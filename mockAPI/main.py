@@ -72,25 +72,43 @@ async def testapi():
 
 
 # Function returns the matches for a given league and season
-@app.get("/matches/{league_name}/{season}")
-async def get_matches(league_name: str, season: str):
+@app.get("/matches/{league}/{season}")
+async def get_matches(league: str, season: int):
 
-    league = LEAGUE_BY_NAME.get(league_name)
-    league_code = league["code"]
+    headers = {
+        "x-apisports-key": API_KEY
+    }
+
+    league_id = LEAGUE_BY_NAME.get(league)
+    league_code = league_id["code"]
     if not league_code:
         raise HTTPException(status_code=404, detail="League not found")
-    
-    season_short = str(season)[-2:]
-    
-    file_path = BASE_DIR / "data" / f"season{season_short}" / "matches" / f"{league_code + '_matches' + season_short}.json"
-    if not file_path.exists():
-        raise HTTPException(status_code=404, detail="Season not found")
-    print(f"Fetching matches from file: {file_path}")
-    
-    with open(file_path, "r", encoding="utf-8") as file:
-        data = json.load(file)
 
-    return data
+    season_short = str(season)[-2:]
+
+    file_path = BASE_DIR / "data" / f"season{season_short}" / "matches" / f"{league_code + '_matches' + season_short}.json"
+
+    def fetch_from_api():
+        response = requests.get(
+            f"{BASE_URL}/fixtures",
+            headers=headers,
+            params={
+                "league": league_id["id"],
+                "season": season
+            }
+        )
+
+        if response.status_code != 200:
+            raise HTTPException(
+                status_code=response.status_code,
+                detail=response.text
+            )
+
+        return response.json()
+
+    result = get_cached_or_fetch(file_path, fetch_from_api)
+
+    return result
 
 
 # Function returns the standings for a given league and season, with caching mechanism to avoid unnecessary API calls

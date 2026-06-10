@@ -27,7 +27,7 @@ export class Matches {
 
       this.api.getMatches(this.leagueId, this.seasonId).subscribe((data: any) => {
         console.log(data);
-        this.mdata.set(data.response);
+        this.mdata.set(data.data.response);
       });
 
     });
