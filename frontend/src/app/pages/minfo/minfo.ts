@@ -14,6 +14,7 @@ export class Minfo {
   seasonId: string = '';
   leagueId: string = '';
   matchId: string = '';
+  minfo_data = signal<any[]>([]);
 
   constructor(private route: ActivatedRoute, private api: Api) {}
 
@@ -25,6 +26,11 @@ export class Minfo {
       this.matchId = params.get('matchId') || '';
 
       if (!this.leagueId || !this.seasonId || !this.matchId) return;
+
+      this.api.getMatchInfo(this.leagueId, this.seasonId, parseInt(this.matchId)).subscribe((data: any) => {
+        console.log(data);
+        this.minfo_data.set(data.data.response);
+      });
     });
   }
 }

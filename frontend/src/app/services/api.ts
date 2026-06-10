@@ -20,4 +20,10 @@ export class Api {
       `http://127.0.0.1:8001/matches/${leagueId}/${seasonId}`
     );
   }
+
+    getMatchInfo(leagueId: string, seasonId: string, matchId: number) {
+    return this.http.get(
+      `http://127.0.0.1:8001/match_info/${leagueId}/${seasonId}/${matchId}`
+    );
+  }
 }

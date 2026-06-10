@@ -1,3 +1,11 @@
 <p>minfo works!</p>
 
 {{ matchId }}
+
+
+@for (info of minfo_data(); track info.fixture.id) {
+    <p>Id: {{ info.fixture.id }} </p>
+    <p>{{ info.events[0].time.elapsed }}</p>
+    <p>{{ info.events[0].player.name }}</p> 
+    <p>{{ info.events[0].detail }}</p> 
+}

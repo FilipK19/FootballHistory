@@ -151,6 +151,43 @@ async def get_standings(league: str, season: int):
     return result
 
 
+@app.get("/match_info/{league}/{season}/{match_id}")
+async def get_match_info(league: str, season: int, match_id: int):
+
+    headers = {
+        "x-apisports-key": API_KEY
+    }
+
+    league_id = LEAGUE_BY_NAME.get(league)
+    league_code = league_id["code"]
+    if not league_code:
+        raise HTTPException(status_code=404, detail="League not found")
+
+    season_short = str(season)[-2:]
+
+    file_path = BASE_DIR / "data" / f"season{season_short}" / "minfo" / f"{league_code}{season_short}_{match_id}.json"
+
+    def fetch_from_api():
+        response = requests.get(
+            f"{BASE_URL}/fixtures",
+            headers=headers,
+            params={
+                "id": match_id
+            }
+        )
+
+        if response.status_code != 200:
+            raise HTTPException(
+                status_code=response.status_code,
+                detail=response.text
+            )
+
+        return response.json()
+
+    result = get_cached_or_fetch(file_path, fetch_from_api)
+
+    return result
+
 
 # Helper function to check for cached data and fetch from API if not available
 def get_cached_or_fetch(file_path: Path, fetch_fn):
