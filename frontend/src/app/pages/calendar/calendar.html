@@ -1,0 +1,14 @@
+<p>calendar works!</p>
+
+{{ seasonId }}
+
+
+@for (league of calendarData(); track league[0]) {
+
+  <h2>{{ league[0] }}</h2>
+
+  @for (match of league[1]; track match.fixture.id) {
+    <p>{{ match.teams.home.name }} vs {{ match.teams.away.name }}</p>
+  }
+
+}

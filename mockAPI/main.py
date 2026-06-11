@@ -212,3 +212,29 @@ def get_cached_or_fetch(file_path: Path, fetch_fn):
         "source": "api",
         "data": data
     }
+
+
+
+@app.get("/matches-all/{season}")
+async def get_all_matches(season: int):
+
+    season_short = str(season)[-2:]
+    result = {}
+
+    for league_name, league_info in LEAGUE_BY_NAME.items():
+
+        league_code = league_info["code"]
+
+        file_path = (
+            BASE_DIR
+            / "data"
+            / f"season{season_short}"
+            / "matches"
+            / f"{league_code}_matches{season_short}.json"
+        )
+
+        with open(file_path, "r", encoding="utf-8") as file:
+            #result[league_name] = json.load(file)
+            result[league_name] = json.load(file)["response"]
+
+    return result

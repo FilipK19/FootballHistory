@@ -21,9 +21,15 @@ export class Api {
     );
   }
 
-    getMatchInfo(leagueId: string, seasonId: string, matchId: number) {
+  getMatchInfo(leagueId: string, seasonId: string, matchId: number) {
     return this.http.get(
       `http://127.0.0.1:8001/match_info/${leagueId}/${seasonId}/${matchId}`
+    );
+  }
+
+    getCalendarInfo(seasonId: string) {
+    return this.http.get(
+      `http://127.0.0.1:8001/matches-all/${seasonId}`
     );
   }
 }
