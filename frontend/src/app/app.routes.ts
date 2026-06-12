@@ -6,6 +6,7 @@ import { League } from './pages/league/league';
 import { Matches } from './pages/matches/matches';
 import { Minfo } from './pages/minfo/minfo';
 import { Calendar } from './pages/calendar/calendar';
+import { Leagueinfo } from './pages/leagueinfo/leagueinfo';
 
 export const routes: Routes = [
     {path: '', component: Home},
@@ -14,5 +15,6 @@ export const routes: Routes = [
     {path: 'league/:leagueId/:seasonId', component: League},
     {path: 'league/:leagueId/:seasonId/matches', component: Matches},
     {path: 'league/:leagueId/:seasonId/matches/:matchId', component: Minfo},
-    {path: 'calendar/:seasonId', component: Calendar}
+    {path: 'calendar/:seasonId', component: Calendar},
+    {path: 'leagueinfo/:leagueId', component: Leagueinfo}
 ];
