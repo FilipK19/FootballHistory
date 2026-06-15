@@ -7,6 +7,7 @@ import { Matches } from './pages/matches/matches';
 import { Minfo } from './pages/minfo/minfo';
 import { Calendar } from './pages/calendar/calendar';
 import { Leagueinfo } from './pages/leagueinfo/leagueinfo';
+import { Clubinfo } from './pages/clubinfo/clubinfo';
 
 export const routes: Routes = [
     {path: '', component: Home},
@@ -16,5 +17,6 @@ export const routes: Routes = [
     {path: 'league/:leagueId/:seasonId/matches', component: Matches},
     {path: 'league/:leagueId/:seasonId/matches/:matchId', component: Minfo},
     {path: 'calendar/:seasonId', component: Calendar},
-    {path: 'leagueinfo/:leagueId', component: Leagueinfo}
+    {path: 'leagueinfo/:leagueId', component: Leagueinfo},
+    {path: 'clubinfo/:clubId', component: Clubinfo}
 ];
