@@ -1,4 +1,31 @@
 .buttons {
     justify-content: center;
     text-align: center;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top:70px;
+}
+
+.buttons button {
+    width: 200px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #182E6F;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buttons button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
