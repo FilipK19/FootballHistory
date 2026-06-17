@@ -1,17 +1,5 @@
  <!-- {{mdata() | json}} -->
 
-<!--
-@for (match of mdata(); track match.fixture.id) {
-    <p>Referee: {{ match.fixture.referee }}</p>
-    <p>Venue: {{ match.fixture.venue.name }} - {{ match.fixture.venue.city }}</p>
-    <p>Date: {{ match.fixture.date }}</p>
-    <button [routerLink]="['/league', leagueId, seasonId, 'matches', match.fixture.id]">
-        {{ match.teams.home.name }} {{ match.score.fulltime.home }} - 
-        {{ match.score.fulltime.away }} {{ match.teams.away.name }}</button>
-    <p>Id: {{ match.fixture.id }}</p>
-    <p>------------------------------------------</p>
-} 
--->
 <div class="match-group">
     @for (group of groupedMatches(); track group[0]) {
 
