@@ -8,6 +8,8 @@
 @for (team of table(); track team.team.id) {
   <p>{{ team.rank }} - <button [routerLink]="['/clubinfo', team.team.name]">{{ team.team.name }}</button></p>
   <p>Points: {{ team.points }}</p>
+  <p>Played: {{ team.all.played }} Win: {{ team.all.win }} Draw: {{ team.all.draw }} Lose: {{ team.all.lose }}</p>
+  <p>Goals for: {{ team.all.goals.for }} Goals against: {{ team.all.goals.against }}</p>
 }
 
 <p>League ID: {{ leagueId }}</p>
