@@ -1,0 +1,24 @@
+.match-button {
+    display: block;
+    margin-bottom: 5px;
+    
+    width: 350px;
+    height: 60px;
+
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #182E6F;
+    color: white;
+}
+
+.match-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}

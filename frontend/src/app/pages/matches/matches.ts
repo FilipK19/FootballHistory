@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
@@ -33,4 +33,20 @@ export class Matches {
     });
 
   }
+
+  groupedMatches = computed(() => {
+  const groups: Record<string, any[]> = {};
+
+  for (const match of this.mdata()) {
+    const date = match.fixture.date.split('T')[0]; // YYYY-MM-DD
+
+    if (!groups[date]) {
+      groups[date] = [];
+    }
+
+    groups[date].push(match);
+  }
+
+  return Object.entries(groups);
+});
 }
