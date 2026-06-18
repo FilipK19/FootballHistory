@@ -5,7 +5,45 @@
 
 @for (info of minfo_data(); track info.fixture.id) {
     <p>Id: {{ info.fixture.id }} </p>
-    <p>{{ info.events[0].time.elapsed }}</p>
-    <p>{{ info.events[0].player.name }}</p> 
-    <p>{{ info.events[0].detail }}</p> 
+    <p>Referee: {{ info.fixture.referee }}</p>
+    <p>Date: {{ info.fixture.date }}</p>
+    <p>Venue: {{ info.fixture.venue.name }}, City: {{ info.fixture.venue.city }}</p>
+    <p>{{info.teams.home.name}} {{info.goals.home}} - {{info.goals.away}} {{info.teams.away.name}}</p>
+}
+
+@for (event of minfo_data()[0].events; track $index) {
+
+  <div class="event">
+
+    <span>{{ event.time.elapsed }}'</span>
+
+    @if (event.type === 'subst') {
+      <span>
+        🔄 {{ event.assist.name }} IN
+      </span>
+
+      <span>
+        {{ event.player.name }} OUT
+      </span>
+    }
+
+    @else if (event.type === 'Goal') {
+      <span>
+        ⚽ {{ event.player.name }}
+      </span>
+
+      @if (event.assist?.name) {
+        <span>
+          (Assist: {{ event.assist.name }})
+        </span>
+      }
+    }
+
+    @else {
+      <span>
+        {{ event.player.name }} - {{ event.detail }}
+      </span>
+    }
+
+  </div>
 }
