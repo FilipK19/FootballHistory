@@ -1,6 +1,18 @@
-<p>minfo works!</p>
+<!-- comment {{ matchId }} -->
 
-{{ matchId }}
+
+<div class="main_score">
+  @for (info of minfo_data(); track info.fixture.id) {
+    <span class="home">{{ info.teams.home.name }}</span>
+    <span class="score">{{ info.goals.home }} - {{ info.goals.away }}</span>
+    <span class="away">{{ info.teams.away.name }}</span>
+  }
+</div>
+
+
+
+
+
 
 
 @for (info of minfo_data(); track info.fixture.id) {
