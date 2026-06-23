@@ -10,7 +10,8 @@
     </div>
 
     <div class="score">
-      {{ info.goals.home }} - {{ info.goals.away }}
+      <span class="date">{{ info.fixture.date | date:'dd.MM.yyyy. HH:mm' }}</span>
+      <span class="goals">{{ info.goals.home }} - {{ info.goals.away }}</span>
     </div>
 
     <div class="team away">
