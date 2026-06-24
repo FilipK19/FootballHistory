@@ -47,15 +47,24 @@
       <span>{{ event.time.elapsed }}'</span>
 
       @if (event.type === 'subst') {
-        <span>🔄 {{ event.assist.name }} IN</span>
+        <span> IN {{ event.assist.name }} 🔄 </span>
         <span>{{ event.player.name }} OUT</span>
       }
 
       @else if (event.type === 'Goal') {
-        <span>⚽ {{ event.player.name }}</span>
+        <span> ⚽ {{ event.player.name }}</span>
 
         @if (event.assist?.name) {
           <span>(Assist: {{ event.assist.name }})</span>
+        }
+      }
+
+      @else if (event.type === 'Card') {
+        @if (event.detail === 'Yellow Card') {
+          <span> 🟨 {{ event.player.name }}</span>
+        }
+        @else if (event.detail === 'Red Card') {
+          <span> 🟥 {{ event.player.name }}</span>
         }
       }
 

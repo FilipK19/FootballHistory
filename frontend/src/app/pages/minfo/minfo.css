@@ -68,8 +68,8 @@
 }
 
 .away-event {
-  align-self: flex-end;
-  text-align: right;
+    align-self: flex-end;
+    text-align: right;
 }
 
 .period-header {
