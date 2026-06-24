@@ -26,8 +26,20 @@
 <div class="events">
   @for (event of minfo_data()[0].events; track $index) {
 
+  @if ($index === 0) {
+    <div class="period-header">First Half</div>
+  }
+
+  @if (
+    $index > 0 &&
+    minfo_data()[0].events[$index - 1].time.elapsed <= 45 &&
+    event.time.elapsed > 45
+  ) {
+    <div class="period-header">Second Half</div>
+  }
+
     <div
-      class="event"
+      class="event" 
       [class.home-event]="event.team.id === minfo_data()[0].teams.home.id"
       [class.away-event]="event.team.id === minfo_data()[0].teams.away.id"
     >
