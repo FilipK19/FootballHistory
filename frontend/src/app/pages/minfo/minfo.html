@@ -23,6 +23,41 @@
 </div>
 
 
+<div class="events">
+  @for (event of minfo_data()[0].events; track $index) {
+
+    <div
+      class="event"
+      [class.home-event]="event.team.id === minfo_data()[0].teams.home.id"
+      [class.away-event]="event.team.id === minfo_data()[0].teams.away.id"
+    >
+
+      <span>{{ event.time.elapsed }}'</span>
+
+      @if (event.type === 'subst') {
+        <span>🔄 {{ event.assist.name }} IN</span>
+        <span>{{ event.player.name }} OUT</span>
+      }
+
+      @else if (event.type === 'Goal') {
+        <span>⚽ {{ event.player.name }}</span>
+
+        @if (event.assist?.name) {
+          <span>(Assist: {{ event.assist.name }})</span>
+        }
+      }
+
+      @else {
+        <span>{{ event.player.name }} - {{ event.detail }}</span>
+      }
+
+    </div>
+  }
+</div>
+
+
+
+
 
 
 
@@ -34,41 +69,4 @@
     <p>Date: {{ info.fixture.date }}</p>
     <p>Venue: {{ info.fixture.venue.name }}, City: {{ info.fixture.venue.city }}</p>
     <p>{{info.teams.home.name}} {{info.goals.home}} - {{info.goals.away}} {{info.teams.away.name}}</p>
-}
-
-@for (event of minfo_data()[0].events; track $index) {
-
-  <div class="event">
-
-    <span>{{ event.time.elapsed }}'</span>
-
-    @if (event.type === 'subst') {
-      <span>
-        🔄 {{ event.assist.name }} IN
-      </span>
-
-      <span>
-        {{ event.player.name }} OUT
-      </span>
-    }
-
-    @else if (event.type === 'Goal') {
-      <span>
-        ⚽ {{ event.player.name }}
-      </span>
-
-      @if (event.assist?.name) {
-        <span>
-          (Assist: {{ event.assist.name }})
-        </span>
-      }
-    }
-
-    @else {
-      <span>
-        {{ event.player.name }} - {{ event.detail }}
-      </span>
-    }
-
-  </div>
 }
