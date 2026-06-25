@@ -1,6 +1,6 @@
 <!-- comment {{ matchId }} -->
 
-
+<!-- loop that iterates over the data and displays match information -->
 <div class="main_score">
   @for (info of minfo_data(); track info.fixture.id) {
 
@@ -23,6 +23,7 @@
 </div>
 
 
+<!-- comment for loop that iterates over the events and displays them in a list -->
 <div class="events">
   @for (event of minfo_data()[0].events; track $index) {
 
@@ -76,14 +77,20 @@
   }
 </div>
 
+ 
+<!-- loop that iterates over the statistics and displays them -->
+@for (stat of displayedStats(); track stat.home.type) {
+
+  <div class="stat-row">
+    <span>{{ stat.home.value }}</span>
+    <span>{{ stat.home.type }}</span>
+    <span>{{ stat.away.value }}</span>
+  </div>
+
+}
 
 
-
-
-
-
-
-
+<!-- test loop -->
 @for (info of minfo_data(); track info.fixture.id) {
     <p>Id: {{ info.fixture.id }} </p>
     <p>Referee: {{ info.fixture.referee }}</p>

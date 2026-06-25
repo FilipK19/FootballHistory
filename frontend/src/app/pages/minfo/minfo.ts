@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
@@ -33,4 +33,26 @@ export class Minfo {
       });
     });
   }
+
+  // filters the statistics to only include the desired data and returns it an array
+  displayedStats = computed(() => {
+  const homeStats = this.minfo_data()?.[0]?.statistics?.[0]?.statistics ?? [];
+  const awayStats = this.minfo_data()?.[0]?.statistics?.[1]?.statistics ?? [];
+
+  const wantedStats = [
+    'Shots on Goal',
+    'Blocked Shots',
+    'Fouls',
+    'Corner Kicks',
+    'Offsides',
+    'Ball Possession',
+    'Goalkeeper Saves',
+    'expected_goals'
+  ];
+
+  return wantedStats.map(statName => ({
+    home: homeStats.find((stat: any) => stat.type === statName),
+    away: awayStats.find((stat: any) => stat.type === statName)
+    }));
+  });
 }
