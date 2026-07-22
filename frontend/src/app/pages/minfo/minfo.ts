@@ -64,23 +64,12 @@ export class Minfo {
   return 0;
 }
 
-getHomePercent(home: any, away: any): number {
-  const h = this.toNumber(home);
-  const a = this.toNumber(away);
+getPercent(value: any, other: any): number {
+    const a = this.toNumber(value);
+    const b = this.toNumber(other);
 
-  const total = h + a;
-  if (total === 0) return 50;
+    const total = a + b;
 
-  return (h / total) * 100;
-}
-
-getAwayPercent(home: any, away: any): number {
-  const h = this.toNumber(home);
-  const a = this.toNumber(away);
-
-  const total = h + a;
-  if (total === 0) return 50;
-
-  return (a / total) * 100;
+    return total ? (a / total) * 100 : 25;
 }
 }
