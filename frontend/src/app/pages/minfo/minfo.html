@@ -79,16 +79,31 @@
 
  
 <!-- loop that iterates over the statistics and displays them -->
-@for (stat of displayedStats(); track stat.home.type) {
+<div class="stat-row">
+  @for (stat of displayedStats(); track stat.home?.type) {
 
-  <div class="stat-row">
-    <span>{{ stat.home.value }}</span>
-    <span>{{ stat.home.type }}</span>
-    <span>{{ stat.away.value }}</span>
-  </div>
+    <span class="value left">{{ stat.home?.value }}</span>
+    <div class="bar">
 
-}
+        <div
+            class="fill home"
+            [style.width.%]="getHomePercent(stat.home?.value, stat.away?.value)">
+        </div>
 
+        <div class="center-line"></div>
+
+        <div
+            class="fill away"
+            [style.width.%]="getAwayPercent(stat.home?.value, stat.away?.value)">
+        </div>
+
+    </div>
+
+    <span class="value right">{{ stat.away?.value }}</span>
+
+    <div class="label">{{ stat.home?.type }}</div>
+  }
+</div>
 
 <!-- test loop -->
 @for (info of minfo_data(); track info.fixture.id) {

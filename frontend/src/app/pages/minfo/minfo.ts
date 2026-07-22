@@ -39,6 +39,7 @@ export class Minfo {
   const homeStats = this.minfo_data()?.[0]?.statistics?.[0]?.statistics ?? [];
   const awayStats = this.minfo_data()?.[0]?.statistics?.[1]?.statistics ?? [];
 
+  // Selected statistics we want to display
   const wantedStats = [
     'Shots on Goal',
     'Blocked Shots',
@@ -55,4 +56,31 @@ export class Minfo {
     away: awayStats.find((stat: any) => stat.type === statName)
     }));
   });
+
+  private toNumber(value: any): number {
+  if (value === null || value === undefined) return 0;
+  if (typeof value === 'number') return value;
+  if (typeof value === 'string') return parseFloat(value.replace('%', '')) || 0;
+  return 0;
+}
+
+getHomePercent(home: any, away: any): number {
+  const h = this.toNumber(home);
+  const a = this.toNumber(away);
+
+  const total = h + a;
+  if (total === 0) return 50;
+
+  return (h / total) * 100;
+}
+
+getAwayPercent(home: any, away: any): number {
+  const h = this.toNumber(home);
+  const a = this.toNumber(away);
+
+  const total = h + a;
+  if (total === 0) return 50;
+
+  return (a / total) * 100;
+}
 }
