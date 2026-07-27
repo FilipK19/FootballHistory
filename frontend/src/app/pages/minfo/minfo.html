@@ -1,5 +1,4 @@
 <!-- comment {{ matchId }} -->
-
 <!-- loop that iterates over the data and displays match information -->
 <div class="main_score">
   @for (info of minfo_data(); track info.fixture.id) {
@@ -24,63 +23,64 @@
 
 
 <!-- comment for loop that iterates over the events and displays them in a list -->
-<div class="events">
-  @for (event of minfo_data()[0].events; track $index) {
+@if (minfo_data()[0]; as info) {
+  <div class="events">
+    @for (event of minfo_data()[0].events; track $index) {
 
-  @if ($index === 0) {
-    <div class="period-header">First Half</div>
-  }
+    @if ($index === 0) {
+      <div class="period-header">First Half</div>
+    }
 
-  @if (
-    $index > 0 &&
-    minfo_data()[0].events[$index - 1].time.elapsed <= 45 &&
-    event.time.elapsed > 45
-  ) {
-    <div class="period-header">Second Half</div>
-  }
+    @if (
+      $index > 0 &&
+      minfo_data()[0].events[$index - 1].time.elapsed <= 45 &&
+      event.time.elapsed > 45
+    ) {
+      <div class="period-header">Second Half</div>
+    }
 
-    <div
-      class="event" 
-      [class.home-event]="event.team.id === minfo_data()[0].teams.home.id"
-      [class.away-event]="event.team.id === minfo_data()[0].teams.away.id"
-    >
+      <div
+        class="event" 
+        [class.home-event]="event.team.id === minfo_data()[0].teams.home.id"
+        [class.away-event]="event.team.id === minfo_data()[0].teams.away.id"
+      >
 
-      <span>{{ event.time.elapsed }}'</span>
+        <span>{{ event.time.elapsed }}'</span>
 
-      @if (event.type === 'subst') {
-        <span> IN {{ event.assist.name }} 🔄 </span>
-        <span>{{ event.player.name }} OUT</span>
-      }
-
-      @else if (event.type === 'Goal') {
-        <span> ⚽ {{ event.player.name }}</span>
-
-        @if (event.assist?.name) {
-          <span>(Assist: {{ event.assist.name }})</span>
+        @if (event.type === 'subst') {
+          <span> IN {{ event.assist.name }} 🔄 </span>
+          <span>{{ event.player.name }} OUT</span>
         }
-      }
 
-      @else if (event.type === 'Card') {
-        @if (event.detail === 'Yellow Card') {
-          <span> 🟨 {{ event.player.name }}</span>
+        @else if (event.type === 'Goal') {
+          <span> ⚽ {{ event.player.name }}</span>
+
+          @if (event.assist?.name) {
+            <span>(Assist: {{ event.assist.name }})</span>
+          }
         }
-        @else if (event.detail === 'Red Card') {
-          <span> 🟥 {{ event.player.name }}</span>
+
+        @else if (event.type === 'Card') {
+          @if (event.detail === 'Yellow Card') {
+            <span> 🟨 {{ event.player.name }}</span>
+          }
+          @else if (event.detail === 'Red Card') {
+            <span> 🟥 {{ event.player.name }}</span>
+          }
         }
-      }
 
-      @else {
-        <span>{{ event.player.name }} - {{ event.detail }}</span>
-      }
+        @else {
+          <span>{{ event.player.name }} - {{ event.detail }}</span>
+        }
 
-    </div>
-  }
-</div>
-
+      </div>
+    }
+  </div>
+}
  
 <!-- loop that iterates over the statistics and displays them -->
 <div class="stat-row">
-  @for (stat of displayedStats(); track stat.home?.type) {
+  @for (stat of displayedStats(); track $index) {
 
     <span class="value left">{{ stat.home?.value }}</span>
     <div class="bar">
@@ -104,6 +104,134 @@
     <div class="label">{{ stat.home?.type }}</div>
   }
 </div>
+
+
+<div class="lineups">
+
+    <div class="pitch">
+
+        <!-- Away -->
+        <div
+          class="player"
+          style="left:47%; bottom:0%;">
+          GK
+        </div>
+
+        <div
+          class="player"
+          style="left:10%; bottom:10%;">
+          LB
+        </div>
+        <div
+          class="player"
+          style="left:30%; bottom:10%;">
+          CB</div>
+        <div
+          class="player"
+          style="right:30%; bottom:10%;">
+          CB</div>
+        <div
+          class="player"
+          style="right:10%; bottom:10%;">
+          RB
+        </div>
+
+        <div
+          class="player"
+          style="right:47%; bottom:20%;">
+          CDM
+        </div>
+        <div
+          class="player"
+          style="right:30%; bottom:25%;">
+          CM
+        </div>
+        <div
+          class="player"
+          style="left:30%; bottom:25%;">
+          CM
+        </div>
+
+        <div
+          class="player"
+          style="left:15%; bottom:40%;">
+          LW
+        </div>
+                <div
+          class="player"
+          style="left:46.8%; bottom:45%;">
+          ST
+        </div>
+        <div
+          class="player"
+          style="right:15%; bottom:40%;">
+          RW
+        </div>
+
+
+        <!-- Home -->
+        <div
+          class="player"
+          style="left:47%; top:2%;">
+          GK
+        </div>
+
+        <div
+          class="player"
+          style="left:10%; top:10%;">
+          LB
+        </div>
+        <div
+          class="player"
+          style="left:30%; top:10%;">
+          CB</div>
+        <div
+          class="player"
+          style="right:30%; top:10%;">
+          CB</div>
+        <div
+          class="player"
+          style="right:10%; top:10%;">
+          RB
+        </div>
+
+        <div
+          class="player"
+          style="right:47%; top:20%;">
+          CDM
+        </div>
+        <div
+          class="player"
+          style="right:30%; top:25%;">
+          CM
+        </div>
+        <div
+          class="player"
+          style="left:30%; top:25%;">
+          CM
+        </div>
+
+        <div
+          class="player"
+          style="left:15%; top:40%;">
+          LW
+        </div>
+                <div
+          class="player"
+          style="left:46.8%; top:45%;">
+          ST
+        </div>
+        <div
+          class="player"
+          style="right:15%; top:40%;">
+          RW
+        </div>
+
+    </div>
+
+</div>
+
+
 
 <!-- test loop -->
 @for (info of minfo_data(); track info.fixture.id) {
