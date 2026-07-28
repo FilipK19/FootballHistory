@@ -89,6 +89,13 @@
 <!-- loop that iterates over the lineups and displays them on the pitch -->
 <div class="lineups">
   <div class="pitch">
+
+    <div class="penalty-box top-box"></div>
+    <div class="penalty-box bottom-box"></div>
+
+    <div class="goal-box top-goal"></div>
+    <div class="goal-box bottom-goal"></div>
+
     <!-- Home -->
     @for (player of homePlayers(); track player.id) {
       <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">

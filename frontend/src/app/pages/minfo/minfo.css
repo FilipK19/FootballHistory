@@ -226,3 +226,22 @@
   border-radius: 50%;
   background: white;
 }
+
+.penalty-box {
+  position: absolute;
+
+  width: 25%;
+  height: 7%;
+  left: 50%;
+
+  border: 2px solid white;
+  transform: translateX(-50%);
+}
+
+.top-box {
+  top: 0;
+}
+
+.bottom-box {
+  bottom: 0;
+}
