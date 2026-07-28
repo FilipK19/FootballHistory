@@ -81,18 +81,36 @@ export class Minfo {
     "4-3-3": [
       {x:50,y:4},   // GK
 
-      {x:10,y:12},
-      {x:35,y:12},
-      {x:65,y:12},
-      {x:90,y:12},
+      {x:10,y:12},  //RB
+      {x:35,y:12},  //CB
+      {x:65,y:12},  //CB
+      {x:90,y:12},  //LB
 
-      {x:30,y:30},
-      {x:50,y:25},
-      {x:70,y:30},
+      {x:30,y:30},  //CM
+      {x:50,y:25},  //CDM
+      {x:70,y:30},  //CM
 
-      {x:15,y:42},
-      {x:50,y:45},
-      {x:85,y:42}
+      {x:15,y:42},  //RW
+      {x:50,y:45},  //ST
+      {x:85,y:42}   //LW
+    ],
+
+      "4-2-3-1": [
+      {x:50,y:4},   // GK
+
+      {x:10,y:12},  //RB
+      {x:35,y:12},  //CB
+      {x:65,y:12},  //CB
+      {x:90,y:12},  //LB
+
+      {x:35,y:25},  //CDM
+      {x:65,y:25},  //CDM
+      
+      {x:50,y:35},  //CAM
+      {x:15,y:35},  //RM
+      {x:85,y:35},  //LM
+
+      {x:50,y:45},  //ST
     ]
   };
 
@@ -111,9 +129,9 @@ export class Minfo {
 
             ...player.player,
 
-            x: c.x,
-
-            y: home ? c.y : 100 - c.y // Invert the y-coordinate for away team to keep display consistent
+            x: home ? c.x : 100 - c.x,
+            y: home ? c.y : 100 - c.y,  // Invert the y and x coordinates for away team to keep display consistent
+            side: home ? 'home' : 'away'
         };
     });
 }
