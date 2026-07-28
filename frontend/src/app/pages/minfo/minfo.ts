@@ -57,19 +57,82 @@ export class Minfo {
     }));
   });
 
+  // Converts a value to a number, handling null, undefined, and percentage strings
   private toNumber(value: any): number {
   if (value === null || value === undefined) return 0;
   if (typeof value === 'number') return value;
   if (typeof value === 'string') return parseFloat(value.replace('%', '')) || 0;
   return 0;
+  }
+
+  // Calculates the percentage of statistics
+  getPercent(value: any, other: any): number {
+      const a = this.toNumber(value);
+      const b = this.toNumber(other);
+
+      const total = a + b;
+
+      return total ? (a / total) * 100 : 25;
+  }
+
+  // Define the coordinates for each formation
+  formationCoordinates: Record<string, {x:number, y:number}[]> = {
+
+    "4-3-3": [
+      {x:50,y:4},   // GK
+
+      {x:10,y:12},
+      {x:35,y:12},
+      {x:65,y:12},
+      {x:90,y:12},
+
+      {x:30,y:30},
+      {x:50,y:25},
+      {x:70,y:30},
+
+      {x:15,y:42},
+      {x:50,y:45},
+      {x:85,y:42}
+    ]
+  };
+
+  // Returns the players with their respective coordinates based on the formation
+  getPlayers(team: any, home = true) {
+
+    const coords =
+        this.formationCoordinates[team.formation] ??
+        this.formationCoordinates["4-3-3"];
+
+    return team.startXI.map((player: any, index: number) => {
+
+        const c = coords[index];
+
+        return {
+
+            ...player.player,
+
+            x: c.x,
+
+            y: home ? c.y : 100 - c.y // Invert the y-coordinate for away team to keep display consistent
+        };
+    });
 }
 
-getPercent(value: any, other: any): number {
-    const a = this.toNumber(value);
-    const b = this.toNumber(other);
+  // Returns the players for the home team
+  homePlayers = computed(() => {
+    const lineup = this.minfo_data()?.[0]?.lineups?.[0];
 
-    const total = a + b;
+    if (!lineup) return [];
 
-    return total ? (a / total) * 100 : 25;
-}
+    return this.getPlayers(lineup, true);
+  });
+
+  // Returns the players for the away team
+  awayPlayers = computed(() => {
+      const lineup = this.minfo_data()?.[0]?.lineups?.[1];
+
+      if (!lineup) return [];
+
+      return this.getPlayers(lineup, false);
+  });
 }

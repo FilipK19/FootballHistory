@@ -17,12 +17,10 @@
       <img class="logo" [src]="info.teams.away.logo">
       <span>{{ info.teams.away.name }}</span>
     </div>
-
   }
 </div>
 
-
-<!-- comment for loop that iterates over the events and displays them in a list -->
+<!-- for loop that iterates over the events and displays them in a list -->
 @if (minfo_data()[0]; as info) {
   <div class="events">
     @for (event of minfo_data()[0].events; track $index) {
@@ -105,130 +103,33 @@
   }
 </div>
 
-
+<!-- loop that iterates over the lineups and displays them on the pitch -->
 <div class="lineups">
-
     <div class="pitch">
 
-        <!-- Away -->
+      <!-- Home -->
+      @for(player of homePlayers(); track player.id){
         <div
-          class="player"
-          style="left:47%; bottom:0%;">
-          GK
-        </div>
+            class="player"
+            [style.left.%]="player.x"
+            [style.top.%]="player.y">
 
-        <div
-          class="player"
-          style="left:10%; bottom:10%;">
-          LB
+            {{ player.name }}
         </div>
-        <div
-          class="player"
-          style="left:30%; bottom:10%;">
-          CB</div>
-        <div
-          class="player"
-          style="right:30%; bottom:10%;">
-          CB</div>
-        <div
-          class="player"
-          style="right:10%; bottom:10%;">
-          RB
-        </div>
+      }
 
+      <!-- Away -->
+      @for(player of awayPlayers(); track player.id){
         <div
-          class="player"
-          style="right:47%; bottom:20%;">
-          CDM
-        </div>
-        <div
-          class="player"
-          style="right:30%; bottom:25%;">
-          CM
-        </div>
-        <div
-          class="player"
-          style="left:30%; bottom:25%;">
-          CM
-        </div>
+            class="player"
+            [style.left.%]="player.x"
+            [style.top.%]="player.y">
 
-        <div
-          class="player"
-          style="left:15%; bottom:40%;">
-          LW
+            {{ player.name }}
         </div>
-                <div
-          class="player"
-          style="left:46.8%; bottom:45%;">
-          ST
-        </div>
-        <div
-          class="player"
-          style="right:15%; bottom:40%;">
-          RW
-        </div>
-
-
-        <!-- Home -->
-        <div
-          class="player"
-          style="left:47%; top:2%;">
-          GK
-        </div>
-
-        <div
-          class="player"
-          style="left:10%; top:10%;">
-          LB
-        </div>
-        <div
-          class="player"
-          style="left:30%; top:10%;">
-          CB</div>
-        <div
-          class="player"
-          style="right:30%; top:10%;">
-          CB</div>
-        <div
-          class="player"
-          style="right:10%; top:10%;">
-          RB
-        </div>
-
-        <div
-          class="player"
-          style="right:47%; top:20%;">
-          CDM
-        </div>
-        <div
-          class="player"
-          style="right:30%; top:25%;">
-          CM
-        </div>
-        <div
-          class="player"
-          style="left:30%; top:25%;">
-          CM
-        </div>
-
-        <div
-          class="player"
-          style="left:15%; top:40%;">
-          LW
-        </div>
-                <div
-          class="player"
-          style="left:46.8%; top:45%;">
-          ST
-        </div>
-        <div
-          class="player"
-          style="right:15%; top:40%;">
-          RW
-        </div>
+      }
 
     </div>
-
 </div>
 
 
