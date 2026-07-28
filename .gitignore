@@ -7,3 +7,6 @@
 # venv
 venv/
 .env/
+
+# data from Football-Data API
+data/
