@@ -132,7 +132,7 @@
   height: 100%;
   background: #555;
   transform: translateX(-1px);
-  z-index: 3;
+  z-index: 1;
 }
 
 .fill {
@@ -180,6 +180,7 @@
   left: 0;
   right: 0;
   top: 50%;
+  z-index: 1;
 
   border-top: 2px solid white;
 }
@@ -196,6 +197,7 @@
 
   left: 50%;
   top: 50%;
+  z-index: 1;
 
   transform: translate(-50%, -50%);
 }
@@ -208,23 +210,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  width: 70px;
-
-  font-size: 14px;
-  text-align: center;
+  z-index: 10;
 }
 
-.player::before {
-  content: '';
-
-  display: block;
+.player-dot {
   width: 20px;
   height: 20px;
 
-  margin: auto;
   border-radius: 50%;
   background: white;
+
+  flex-shrink: 0;
+}
+
+.player-name {
+  margin-top: 4px;
+
+  width: 80px;
+
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.1;
+
+  word-break: break-word;
 }
 
 .penalty-box {
@@ -236,6 +244,7 @@
 
   border: 2px solid white;
   transform: translateX(-50%);
+  z-index: 1;
 }
 
 .top-box {
