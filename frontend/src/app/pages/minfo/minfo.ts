@@ -132,26 +132,56 @@ export class Minfo {
   };
 
   // Returns the players with their respective coordinates based on the formation
-  getPlayers(team: any, home = true) {
+  getPlayers(team:any, home=true) {
 
-    const coords =
-        this.formationCoordinates[team.formation] ??
-        this.formationCoordinates["4-3-3"];
+    let players;
+    // 1. Use custom formation
+    if(this.formationCoordinates[team.formation]) {
 
-    return team.startXI.map((player: any, index: number) => {
+      const coords =
+        this.formationCoordinates[team.formation];
 
-        const c = coords[index];
+      players = team.startXI.map(
+        (player:any,index:number)=>({
 
-        return {
+          ...player.player,
 
-            ...player.player,
+          x:coords[index].x,
+          y:coords[index].y
+        })
+      );
 
-            x: home ? c.x : 100 - c.x,
-            y: home ? c.y : 100 - c.y,  // Invert the y and x coordinates for away team to keep display consistent
-            side: home ? 'home' : 'away'
-        };
-    });
-}
+    }
+
+    // 2. Use API grid
+    else if(team.startXI[0]?.player?.grid) {
+
+      players = this.generateFromGrid(team);
+
+    }
+
+    // 3. Last fallback
+    else {
+
+      //players = this.generateFormation(team.formation, team);
+
+    }
+
+
+
+    return players.map((p:any)=>({
+
+        ...p,
+
+        x:home ? p.x : 100-p.x,
+
+        y:home ? p.y : 100-p.y, // Invert the y and x coordinates for away team to keep display consistent
+
+        side:home?'home':'away'
+
+    }));
+
+  }
 
   // Returns the players for the home team
   homePlayers = computed(() => {
@@ -170,4 +200,53 @@ export class Minfo {
 
       return this.getPlayers(lineup, false);
   });
+
+  // Generates player positions based on their grid values
+  generateFromGrid(team: any) {
+
+    return team.startXI.map((player: any) => {
+
+      const grid = player.player.grid;
+
+      if (!grid) {
+        return null;
+      }
+
+      const [row, col] = grid.split(':').map(Number);
+
+
+      // Number of players in this row
+      const playersInRow = team.startXI.filter(
+        (p:any) => p.player.grid?.startsWith(row + ':')
+      ).length;
+
+      // Calculate x position based on the number of players in the row and their column
+      const x =
+        playersInRow === 1
+          ? 50
+          : ((playersInRow - col + 1) / (playersInRow + 1)) * 100;
+
+
+      const yPositions:any = {
+        1:4,    // GK
+        2:12,   // Defence
+        3:25,   // Midfield
+        4:35,   // Attacking midfield
+        5:45    // Striker
+      };
+
+
+      return {
+
+        ...player.player,
+
+        x:x,
+
+        y:yPositions[row] ?? row * 12
+
+      };
+
+    }).filter(Boolean);
+
+  }
 }
