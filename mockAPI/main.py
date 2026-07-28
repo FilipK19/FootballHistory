@@ -214,7 +214,6 @@ def get_cached_or_fetch(file_path: Path, fetch_fn):
     }
 
 
-
 @app.get("/matches-all/{season}")
 async def get_all_matches(season: int):
 
