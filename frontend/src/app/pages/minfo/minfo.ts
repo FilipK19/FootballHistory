@@ -3,9 +3,11 @@ import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import { Api } from '../../services/api';
 import { CommonModule } from '@angular/common';
 
+import { Player } from '../../assets/player/player';
+
 @Component({
   selector: 'app-minfo',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, Player],
   templateUrl: './minfo.html',
   styleUrl: './minfo.css',
 })

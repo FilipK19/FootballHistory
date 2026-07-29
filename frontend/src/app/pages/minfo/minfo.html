@@ -116,7 +116,14 @@
       <!-- Home -->
       @for (player of homePlayers(); track player.id) {
         <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
-          <div class="player-dot"></div>
+          <div class="jersey">
+            <app-player
+              [color]="'#ff0000'">
+            </app-player>
+            <div class="player-number">
+              {{ player.number }}
+            </div>
+          </div>
           <div class="player-name">
             {{ player.name }}
           </div>
@@ -126,7 +133,14 @@
       <!-- Away -->
       @for (player of awayPlayers(); track player.id) {
         <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
-          <div class="player-dot"></div>
+          <div class="jersey">
+            <app-player
+              [color]="'#ff0000'">
+            </app-player>
+            <div class="player-number">
+              {{ player.number }}
+            </div>
+          </div>
           <div class="player-name">
             {{ player.name }}
           </div>
