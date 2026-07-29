@@ -226,6 +226,18 @@ export class Minfo {
       .filter(Boolean);
   }
 
+  // STATISTICS active tab
   // Signal to track the active tab in the UI
   activeTab = signal('overview');
+
+  // returns all statistics from the API
+  displayedAllStats = computed(() => {
+    const homeStats = this.minfo_data()?.[0]?.statistics?.[0]?.statistics ?? [];
+    const awayStats = this.minfo_data()?.[0]?.statistics?.[1]?.statistics ?? [];
+
+    return homeStats.map((homeStat: any) => ({
+      home: homeStat,
+      away: awayStats.find((awayStat: any) => awayStat.type === homeStat.type),
+    }));
+  });
 }

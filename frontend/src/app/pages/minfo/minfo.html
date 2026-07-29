@@ -83,6 +83,8 @@
   <!-- loop that iterates over the statistics and displays them -->
   <div class="stat-row">
     @for (stat of displayedStats(); track $index) {
+      <div class="label">{{ stat.home?.type }}</div>
+
       <span class="value left">{{ stat.home?.value }}</span>
       <div class="bar">
         <div
@@ -99,8 +101,6 @@
       </div>
 
       <span class="value right">{{ stat.away?.value }}</span>
-
-      <div class="label">{{ stat.home?.type }}</div>
     }
   </div>
 
@@ -150,6 +150,30 @@
 
 @if (activeTab() === 'statistics') {
   <h1>Statistics</h1>
+
+  <!-- loop that iterates over the statistics and displays them -->
+  <div class="stat-row">
+    @for (stat of displayedAllStats(); track stat.home?.type) {
+      <div class="label">{{ stat.home?.type }}</div>
+
+      <span class="value left">{{ stat.home?.value }}</span>
+      <div class="bar">
+        <div
+          class="fill home"
+          [style.width.%]="getPercent(stat.home?.value, stat.away?.value)"
+        ></div>
+
+        <div class="center-line"></div>
+
+        <div
+          class="fill away"
+          [style.width.%]="getPercent(stat.away?.value, stat.home?.value)"
+        ></div>
+      </div>
+
+      <span class="value right">{{ stat.away?.value }}</span>
+    }
+  </div>
 }
 
 @if (activeTab() === 'standings') {
