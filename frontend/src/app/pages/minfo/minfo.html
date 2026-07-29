@@ -19,113 +19,139 @@
   }
 </div>
 
-<!-- for loop that iterates over the events and displays them in a list -->
-@if (minfo_data()[0]; as info) {
-  <div class="events">
-    @for (event of minfo_data()[0].events; track $index) {
-      @if ($index === 0) {
-        <div class="period-header">First Half</div>
-      }
+<nav class="league-nav">
+  <button (click)="activeTab.set('overview')" [class.active]="activeTab() === 'overview'">
+    Overview
+  </button>
 
-      @if (
-        $index > 0 &&
-        minfo_data()[0].events[$index - 1].time.elapsed <= 45 &&
-        event.time.elapsed > 45
-      ) {
-        <div class="period-header">Second Half</div>
-      }
+  <button (click)="activeTab.set('statistics')" [class.active]="activeTab() === 'statistics'">
+    Statistics
+  </button>
 
-      <div
-        class="event"
-        [class.home-event]="event.team.id === minfo_data()[0].teams.home.id"
-        [class.away-event]="event.team.id === minfo_data()[0].teams.away.id"
-      >
-        <span>{{ event.time.elapsed }}'</span>
+  <button (click)="activeTab.set('standings')" [class.active]="activeTab() === 'standings'">
+    Standings
+  </button>
+</nav>
 
-        @if (event.type === 'subst') {
-          <span> IN {{ event.assist.name }} 🔄 </span>
-          <span>{{ event.player.name }} OUT</span>
-
-        } @else if (event.type === 'Goal') {
-          <span> ⚽ {{ event.player.name }}</span>
-
-          @if (event.assist?.name) {
-            <span>(Assist: {{ event.assist.name }})</span>
-          }
-
-        } @else if (event.type === 'Card') {
-          @if (event.detail === 'Yellow Card') {
-            <span> 🟨 {{ event.player.name }}</span>
-          } @else if (event.detail === 'Red Card') {
-            <span> 🟥 {{ event.player.name }}</span>
-          }
-
-        } @else {
-          <span>{{ event.player.name }} - {{ event.detail }}</span>
+@if (activeTab() === 'overview') {
+  <!-- for loop that iterates over the events and displays them in a list -->
+  @if (minfo_data()[0]; as info) {
+    <div class="events">
+      @for (event of minfo_data()[0].events; track $index) {
+        @if ($index === 0) {
+          <div class="period-header">First Half</div>
         }
+
+        @if (
+          $index > 0 &&
+          minfo_data()[0].events[$index - 1].time.elapsed <= 45 &&
+          event.time.elapsed > 45
+        ) {
+          <div class="period-header">Second Half</div>
+        }
+
+        <div
+          class="event"
+          [class.home-event]="event.team.id === minfo_data()[0].teams.home.id"
+          [class.away-event]="event.team.id === minfo_data()[0].teams.away.id"
+        >
+          <span>{{ event.time.elapsed }}'</span>
+
+          @if (event.type === 'subst') {
+            <span> IN {{ event.assist.name }} 🔄 </span>
+            <span>{{ event.player.name }} OUT</span>
+          } @else if (event.type === 'Goal') {
+            <span> ⚽ {{ event.player.name }}</span>
+
+            @if (event.assist?.name) {
+              <span>(Assist: {{ event.assist.name }})</span>
+            }
+          } @else if (event.type === 'Card') {
+            @if (event.detail === 'Yellow Card') {
+              <span> 🟨 {{ event.player.name }}</span>
+            } @else if (event.detail === 'Red Card') {
+              <span> 🟥 {{ event.player.name }}</span>
+            }
+          } @else {
+            <span>{{ event.player.name }} - {{ event.detail }}</span>
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <!-- loop that iterates over the statistics and displays them -->
+  <div class="stat-row">
+    @for (stat of displayedStats(); track $index) {
+      <span class="value left">{{ stat.home?.value }}</span>
+      <div class="bar">
+        <div
+          class="fill home"
+          [style.width.%]="getPercent(stat.home?.value, stat.away?.value)"
+        ></div>
+
+        <div class="center-line"></div>
+
+        <div
+          class="fill away"
+          [style.width.%]="getPercent(stat.away?.value, stat.home?.value)"
+        ></div>
       </div>
+
+      <span class="value right">{{ stat.away?.value }}</span>
+
+      <div class="label">{{ stat.home?.type }}</div>
     }
   </div>
+
+  <!-- loop that iterates over the lineups and displays them on the pitch -->
+  <div class="lineups">
+    <div class="pitch">
+      <div class="penalty-box top-box"></div>
+      <div class="penalty-box bottom-box"></div>
+
+      <div class="goal-box top-goal"></div>
+      <div class="goal-box bottom-goal"></div>
+
+      <!-- Home -->
+      @for (player of homePlayers(); track player.id) {
+        <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
+          <div class="player-dot"></div>
+          <div class="player-name">
+            {{ player.name }}
+          </div>
+        </div>
+      }
+
+      <!-- Away -->
+      @for (player of awayPlayers(); track player.id) {
+        <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
+          <div class="player-dot"></div>
+          <div class="player-name">
+            {{ player.name }}
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- test loop -->
+  @for (info of minfo_data(); track info.fixture.id) {
+    <p>Id: {{ info.fixture.id }}</p>
+    <p>Referee: {{ info.fixture.referee }}</p>
+    <p>Date: {{ info.fixture.date }}</p>
+    <p>Venue: {{ info.fixture.venue.name }}, City: {{ info.fixture.venue.city }}</p>
+    <p>
+      {{ info.teams.home.name }} {{ info.goals.home }} - {{ info.goals.away }}
+      {{ info.teams.away.name }}
+    </p>
+  }
 }
 
-<!-- loop that iterates over the statistics and displays them -->
-<div class="stat-row">
-  @for (stat of displayedStats(); track $index) {
-    <span class="value left">{{ stat.home?.value }}</span>
-    <div class="bar">
-      <div class="fill home" [style.width.%]="getPercent(stat.home?.value, stat.away?.value)"></div>
+@if (activeTab() === 'statistics') {
+  <h1>Statistics</h1>
+}
 
-      <div class="center-line"></div>
-
-      <div class="fill away" [style.width.%]="getPercent(stat.away?.value, stat.home?.value)"></div>
-    </div>
-
-    <span class="value right">{{ stat.away?.value }}</span>
-
-    <div class="label">{{ stat.home?.type }}</div>
-  }
-</div>
-
-<!-- loop that iterates over the lineups and displays them on the pitch -->
-<div class="lineups">
-  <div class="pitch">
-
-    <div class="penalty-box top-box"></div>
-    <div class="penalty-box bottom-box"></div>
-
-    <div class="goal-box top-goal"></div>
-    <div class="goal-box bottom-goal"></div>
-
-    <!-- Home -->
-    @for (player of homePlayers(); track player.id) {
-      <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
-        <div class="player-dot"></div>
-        <div class="player-name">
-          {{ player.name }}
-        </div>
-      </div>
-    }
-
-    <!-- Away -->
-    @for (player of awayPlayers(); track player.id) {
-      <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
-        <div class="player-dot"></div>
-        <div class="player-name">
-          {{ player.name }}
-        </div>
-      </div>
-    }
-  </div>
-</div>
-
-<!-- test loop -->
-@for (info of minfo_data(); track info.fixture.id) {
-  <p>Id: {{ info.fixture.id }}</p>
-  <p>Referee: {{ info.fixture.referee }}</p>
-  <p>Date: {{ info.fixture.date }}</p>
-  <p>Venue: {{ info.fixture.venue.name }}, City: {{ info.fixture.venue.city }}</p>
-  <p>
-    {{ info.teams.home.name }} {{ info.goals.home }} - {{ info.goals.away }}
-    {{ info.teams.away.name }}
-  </p>
+@if (activeTab() === 'standings') {
+  <h1>Standings</h1>
 }

@@ -54,7 +54,7 @@
 
   background-color: #ebebeb;
   padding: 20px;
-  margin-top: 35px;
+  margin-top: 25px;
 }
 
 .event {
@@ -254,4 +254,25 @@
 
 .bottom-box {
   bottom: 0;
+}
+
+.league-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  margin-left: 280px;
+}
+
+.league-nav button {
+  font-size: 16px;
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+}
+
+.league-nav button.active {
+  border-bottom-color: dodgerblue;
+  font-weight: bold;
 }

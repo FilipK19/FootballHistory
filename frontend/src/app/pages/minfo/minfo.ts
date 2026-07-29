@@ -225,4 +225,7 @@ export class Minfo {
       })
       .filter(Boolean);
   }
+
+  // Signal to track the active tab in the UI
+  activeTab = signal('overview');
 }
