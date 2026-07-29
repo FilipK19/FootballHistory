@@ -168,6 +168,11 @@ export class Minfo {
       y: home ? p.y : 100 - p.y, // Invert the y and x coordinates for away team to keep display consistent
 
       side: home ? 'home' : 'away',
+
+      // Store complete kit information
+      kit: p.pos === 'G'
+      ? team.team.colors.goalkeeper
+      : team.team.colors.player
     }));
   }
 
