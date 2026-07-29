@@ -95,7 +95,7 @@ export class Minfo {
       { x: 70, y: 30 }, //CM
 
       { x: 15, y: 42 }, //RW
-      { x: 50, y: 45 }, //ST
+      { x: 50, y: 44 }, //ST
       { x: 85, y: 42 }, //LW
     ],
 
@@ -114,7 +114,7 @@ export class Minfo {
       { x: 50, y: 35 }, //CAM
       { x: 85, y: 35 }, //LM
 
-      { x: 50, y: 45 }, //ST
+      { x: 50, y: 44 }, //ST
     ],
 
     '3-5-2': [
@@ -130,8 +130,8 @@ export class Minfo {
       { x: 50, y: 25 }, //CAM
       { x: 10, y: 27 }, //RM
 
-      { x: 60, y: 45 }, //LM
-      { x: 40, y: 45 }, //ST
+      { x: 60, y: 44 }, //LM
+      { x: 40, y: 44 }, //ST
     ],
   };
 
@@ -214,7 +214,7 @@ export class Minfo {
           2: 12, // Defence
           3: 25, // Midfield
           4: 35, // Attacking midfield
-          5: 45, // Striker
+          5: 44, // Striker
         };
 
         return {
