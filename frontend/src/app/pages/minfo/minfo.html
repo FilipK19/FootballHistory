@@ -82,7 +82,7 @@
 
   <!-- loop that iterates over the statistics and displays them -->
   <div class="stat-row">
-    @for (stat of displayedStats(); track stat.home?.type) {
+    @for (stat of displayedStats(); track $index) {
       <div class="label">{{ stat.home?.type }}</div>
 
       <span class="value left">{{ stat.home?.value }}</span>
