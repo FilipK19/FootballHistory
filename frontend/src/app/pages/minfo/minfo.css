@@ -301,3 +301,19 @@
   border-bottom-color: dodgerblue;
   font-weight: bold;
 }
+
+/*` Substitutions `*/
+.substitutions {
+  display: flex;
+  justify-content: center;
+  gap: 30%;
+}
+
+.sub-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-column p {
+  margin: 4px 0;
+}

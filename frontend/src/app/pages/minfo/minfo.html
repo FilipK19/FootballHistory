@@ -148,8 +148,24 @@
       }
     </div>
   </div>
-}
 
+  <!-- loop that iterates over the substitutions and displays them in two columns -->
+  <div class="substitutions">
+    @for (sub of minfo_data(); track sub.fixture.id) {
+      <div class="sub-column">
+        @for (bench of sub.lineups[0].substitutes; track bench.player.id) {
+          <p>{{ bench.player.name }}</p>
+        }
+      </div>
+
+      <div class="sub-column">
+        @for (bench of sub.lineups[1].substitutes; track bench.player.id) {
+          <p>{{ bench.player.name }}</p>
+        }
+      </div>
+    }
+  </div>
+}
 
 @if (activeTab() === 'statistics') {
   <h1>Statistics</h1>
@@ -187,8 +203,13 @@
   <h1>Match Info</h1>
 
   @for (info of minfo_data(); track info.fixture.id) {
-    <p>Match: {{info.teams.home.name}} vs {{info.teams.away.name}}, League round: {{info.league.round}},</p>
-    <p>Status: {{info.fixture.status.long}}, Score: {{info.goals.home}} - {{info.goals.away}}</p>
+    <p>
+      Match: {{ info.teams.home.name }} vs {{ info.teams.away.name }}, League round:
+      {{ info.league.round }},
+    </p>
+    <p>
+      Status: {{ info.fixture.status.long }}, Score: {{ info.goals.home }} - {{ info.goals.away }}
+    </p>
     <p>Referee: {{ info.fixture.referee }}</p>
     <p>Venue: {{ info.fixture.venue.name }}, City: {{ info.fixture.venue.city }}</p>
     <p>Date: {{ info.fixture.date | date: 'dd.MM.yyyy. HH:mm' }}</p>
@@ -200,39 +221,46 @@
 
     <div>
       <p>{{ info.teams.home.name }}:</p>
-      <p>Team coach: {{info.lineups[0].coach.name}}</p>
-      <p>Team colors: {{info.lineups[0].team.colors.player.primary}}</p>
-      <p>Team formation: {{info.lineups[0].formation}}</p>
+      <p>Team coach: {{ info.lineups[0].coach.name }}</p>
+      <p>Team colors: {{ info.lineups[0].team.colors.player.primary }}</p>
+      <p>Team formation: {{ info.lineups[0].formation }}</p>
 
-      <p>Starting XI:
-      @for (player of info.lineups[0].startXI; track player.player.id) {
-        {{ player.player.name }},
-      }</p>
+      <p>
+        Starting XI:
+        @for (player of info.lineups[0].startXI; track player.player.id) {
+          {{ player.player.name }},
+        }
+      </p>
 
-      <p>Substitutes:
-      @for (player of info.lineups[0].substitutes; track player.id) {
-        {{ player.player.name }},
-      }</p>
+      <p>
+        Substitutes:
+        @for (player of info.lineups[0].substitutes; track player.id) {
+          {{ player.player.name }},
+        }
+      </p>
     </div>
 
     <p>_________</p>
 
     <div>
       <p>{{ info.teams.away.name }}:</p>
-      <p>Team coach: {{info.lineups[1].coach.name}}</p>
-      <p>Team colors: {{info.lineups[1].team.colors.player.primary}}</p>
-      <p>Team formation: {{info.lineups[1].formation}}</p>
+      <p>Team coach: {{ info.lineups[1].coach.name }}</p>
+      <p>Team colors: {{ info.lineups[1].team.colors.player.primary }}</p>
+      <p>Team formation: {{ info.lineups[1].formation }}</p>
 
-      <p>>Starting XI:
-      @for (player of info.lineups[1].startXI; track player.player.id) {
-        {{ player.player.name }},
-      }</p>
+      <p>
+        >Starting XI:
+        @for (player of info.lineups[1].startXI; track player.player.id) {
+          {{ player.player.name }},
+        }
+      </p>
 
-      <p>Substitutes:
-      @for (player of info.lineups[1].substitutes; track player.id) {
-        {{ player.player.name }},
-      }</p>
+      <p>
+        Substitutes:
+        @for (player of info.lineups[1].substitutes; track player.id) {
+          {{ player.player.name }},
+        }
+      </p>
     </div>
-
   }
 }
