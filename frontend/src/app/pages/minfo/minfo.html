@@ -28,8 +28,11 @@
     Statistics
   </button>
 
-  <button (click)="activeTab.set('standings')" [class.active]="activeTab() === 'standings'">
-    Standings
+  <button
+    (click)="activeTab.set('player_ratings')"
+    [class.active]="activeTab() === 'player_ratings'"
+  >
+    Player Ratings
   </button>
 
   <button (click)="activeTab.set('match_info')" [class.active]="activeTab() === 'match_info'">
@@ -195,8 +198,55 @@
   </div>
 }
 
-@if (activeTab() === 'standings') {
-  <h1>Standings</h1>
+@if (activeTab() === 'player_ratings') {
+  <h1>Player Ratings</h1>
+
+  <!-- loop that iterates over the lineups and displays them on the pitch -->
+  <div class="lineups">
+    <div class="pitch">
+      <div class="penalty-box top-box"></div>
+      <div class="penalty-box bottom-box"></div>
+
+      <div class="goal-box top-goal"></div>
+      <div class="goal-box bottom-goal"></div>
+
+      <!-- Home -->
+      @for (player of homePlayers(); track player.id) {
+        <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
+          <div class="jersey">
+            <app-player [color]="'#' + player.kit.primary"> </app-player>
+            <div class="player-number" [style.color]="'#' + player.kit.number">
+              {{ player.number }}
+            </div>
+          </div>
+          <div class="player-name">
+            {{ player.name }}
+            {{ player.rating }}
+          </div>
+        </div>
+      }
+
+      <!-- Away -->
+      @for (player of awayPlayers(); track player.id) {
+        <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
+          <div class="jersey">
+            <app-player [color]="'#' + player.kit.primary"> </app-player>
+            <div class="player-number" [style.color]="'#' + player.kit.number">
+              {{ player.number }}
+            </div>
+          </div>
+          <div class="player-name">
+            {{ player.name }}
+            {{ player.rating }}
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  @for (prating of minfo_data()[0].players[0].players; track prating.player.id) {
+    <p>{{ prating.player.name }} - Rating: {{ prating.statistics[0].games.rating }}</p>
+  }
 }
 
 @if (activeTab() === 'match_info') {

@@ -160,20 +160,32 @@ export class Minfo {
       //players = this.generateFormation(team.formation, team);
     }
 
-    return players.map((p: any) => ({
-      ...p,
+    // Find whether this is home or away
+    const teamIndex = home ? 0 : 1;
 
-      x: home ? p.x : 100 - p.x,
+    // Get player statistics for this team
+    const playerStats = this.minfo_data()?.[0]?.players?.[teamIndex]?.players ?? [];
 
-      y: home ? p.y : 100 - p.y, // Invert the y and x coordinates for away team to keep display consistent
+    return players.map((p: any) => {
+      // Find this player's statistics using their ID
+      const stats = playerStats.find((stat: any) => stat.player.id === p.id);
 
-      side: home ? 'home' : 'away',
+      return {
+        ...p,
 
-      // Store complete kit information
-      kit: p.pos === 'G'
-      ? team.team.colors.goalkeeper
-      : team.team.colors.player
-    }));
+        x: home ? p.x : 100 - p.x,
+
+        y: home ? p.y : 100 - p.y, // Invert the y and x coordinates for away team to keep display consistent
+
+        side: home ? 'home' : 'away',
+
+        // Store complete kit information
+        kit: p.pos === 'G' ? team.team.colors.goalkeeper : team.team.colors.player,
+
+        // Player match rating
+        rating: stats?.statistics?.[0]?.games?.rating ?? null,
+      };
+    });
   }
 
   // Returns the players for the home team
