@@ -212,7 +212,12 @@
 
       <!-- Home -->
       @for (player of homePlayers(); track player.id) {
-        <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
+        <div
+          class="player"
+          [style.left.%]="player.x"
+          [style.top.%]="player.y"
+          (click)="selectPlayer(player)"
+        >
           <div class="jersey">
             <app-player [color]="'#' + player.kit.primary"> </app-player>
             <div class="player-number" [style.color]="'#' + player.kit.number">
@@ -228,7 +233,12 @@
 
       <!-- Away -->
       @for (player of awayPlayers(); track player.id) {
-        <div class="player" [style.left.%]="player.x" [style.top.%]="player.y">
+        <div
+          class="player"
+          [style.left.%]="player.x"
+          [style.top.%]="player.y"
+          (click)="selectPlayer(player)"
+        >
           <div class="jersey">
             <app-player [color]="'#' + player.kit.primary"> </app-player>
             <div class="player-number" [style.color]="'#' + player.kit.number">
@@ -243,6 +253,18 @@
       }
     </div>
   </div>
+
+  @if (selectedPlayer(); as player) {
+    <div class="player-popup-overlay" (click)="closePlayerPopup()">
+      <div class="player-popup" (click)="$event.stopPropagation()">
+        <button class="close-button" (click)="closePlayerPopup()">×</button>
+
+        <h2>{{ player.name }}</h2>
+
+        <p>Rating: {{ player.rating }}</p>
+      </div>
+    </div>
+  }
 
   @for (prating of minfo_data()[0].players[0].players; track prating.player.id) {
     <p>{{ prating.player.name }} - Rating: {{ prating.statistics[0].games.rating }}</p>

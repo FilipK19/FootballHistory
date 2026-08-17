@@ -259,4 +259,14 @@ export class Minfo {
       away: awayStats.find((awayStat: any) => awayStat.type === homeStat.type),
     }));
   });
+
+  // PLAYER RATINGS active tab
+  selectedPlayer = signal<any | null>(null);
+
+  selectPlayer(player: any) {
+    this.selectedPlayer.set(player);
+  }
+  closePlayerPopup() {
+    this.selectedPlayer.set(null);
+  }
 }
