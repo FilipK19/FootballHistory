@@ -222,7 +222,13 @@
     <div>
       <p>{{ info.teams.home.name }}:</p>
       <p>Team coach: {{ info.lineups[0].coach.name }}</p>
-      <p>Team colors: {{ info.lineups[0].team.colors.player.primary }}</p>
+      <div class="team-color">
+        <span>Team color:</span>
+        <div
+          class="box"
+          [style.backgroundColor]="'#' + info.lineups[0].team.colors.player.primary"
+        ></div>
+      </div>
       <p>Team formation: {{ info.lineups[0].formation }}</p>
 
       <p>
@@ -245,7 +251,13 @@
     <div>
       <p>{{ info.teams.away.name }}:</p>
       <p>Team coach: {{ info.lineups[1].coach.name }}</p>
-      <p>Team colors: {{ info.lineups[1].team.colors.player.primary }}</p>
+      <div class="team-color">
+        <span>Team color:</span>
+        <div
+          class="box"
+          [style.backgroundColor]="'#' + info.lineups[1].team.colors.player.primary"
+        ></div>
+      </div>
       <p>Team formation: {{ info.lineups[1].formation }}</p>
 
       <p>

@@ -317,3 +317,17 @@
 .sub-column p {
   margin: 4px 0;
 }
+
+/*` Match Info `*/
+.team-color {
+  display: flex;
+  align-items: center;
+}
+
+.box {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  border: 1px solid #000;
+  border-radius: 3px;
+}
