@@ -160,30 +160,42 @@ export class Minfo {
       //players = this.generateFormation(team.formation, team);
     }
 
-    // Find whether this is home or away
-    const teamIndex = home ? 0 : 1;
-
-    // Get player statistics for this team
-    const playerStats = this.minfo_data()?.[0]?.players?.[teamIndex]?.players ?? [];
+    // finds player statistics form API using Id
+    const teamPlayerStats =
+      this.minfo_data()?.[0]?.players?.find((teamData: any) => teamData.team.id === team.team.id)
+        ?.players ?? [];
 
     return players.map((p: any) => {
-      // Find this player's statistics using their ID
-      const stats = playerStats.find((stat: any) => stat.player.id === p.id);
+      const statsPlayer = teamPlayerStats.find((playerData: any) => playerData.player.id === p.id);
+
+      const statistics = statsPlayer?.statistics?.[0];
 
       return {
         ...p,
 
-        x: home ? p.x : 100 - p.x,
+        // Player statistics
+        rating: statistics?.games?.rating ?? null,
+        minutes: statistics?.games?.minutes ?? null,
+        position: statistics?.games?.position ?? null,
+        captain: statistics?.games?.captain ?? false,
+        substitute: statistics?.games?.substitute ?? false,
 
+        goals: statistics?.goals ?? null,
+        shots: statistics?.shots ?? null,
+        passes: statistics?.passes ?? null,
+        tackles: statistics?.tackles ?? null,
+        duels: statistics?.duels ?? null,
+        dribbles: statistics?.dribbles ?? null,
+        fouls: statistics?.fouls ?? null,
+        cards: statistics?.cards ?? null,
+        penalty: statistics?.penalty ?? null,
+
+        x: home ? p.x : 100 - p.x,
         y: home ? p.y : 100 - p.y, // Invert the y and x coordinates for away team to keep display consistent
 
         side: home ? 'home' : 'away',
 
-        // Store complete kit information
-        kit: p.pos === 'G' ? team.team.colors.goalkeeper : team.team.colors.player,
-
-        // Player match rating
-        rating: stats?.statistics?.[0]?.games?.rating ?? null,
+        kit: p.pos === 'G' ? team.team.colors.goalkeeper : team.team.colors.player
       };
     });
   }

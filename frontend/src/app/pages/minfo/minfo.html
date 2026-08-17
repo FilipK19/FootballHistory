@@ -259,9 +259,12 @@
       <div class="player-popup" (click)="$event.stopPropagation()">
         <button class="close-button" (click)="closePlayerPopup()">×</button>
 
-        <h2>{{ player.name }}</h2>
+        <h2>{{ player.number }} {{ player.name }}</h2>
 
         <p>Rating: {{ player.rating }}</p>
+        <p>Minutes played: {{ player.minutes }}</p>
+        <p>Position: {{ player.position }}</p>
+        <p>Passes: {{ player.passes.total }} {{ player.passes.accuracy }}%</p>
       </div>
     </div>
   }
