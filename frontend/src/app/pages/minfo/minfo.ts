@@ -136,28 +136,36 @@ export class Minfo {
   };
 
   // Returns the players with their respective coordinates based on the formation
-  getPlayers(team: any, home = true) {
+  getPlayers(team: any, home = true, playerList: any[] = team.startXI, usePosition = true) {
     let players;
     // 1. Use custom formation
-    if (this.formationCoordinates[team.formation]) {
+    if (usePosition && this.formationCoordinates[team.formation]) {
       const coords = this.formationCoordinates[team.formation];
 
       players = team.startXI.map((player: any, index: number) => ({
         ...player.player,
 
-        x: coords[index].x,
-        y: coords[index].y,
+        x: coords[index]?.x ?? 50,
+        y: coords[index]?.y ?? 50,
       }));
     }
 
     // 2. Use API grid
-    else if (team.startXI[0]?.player?.grid) {
-      players = this.generateFromGrid(team);
+    else if (usePosition && playerList[0]?.player?.grid) {
+      players = this.generateFromGrid({
+        ...team,
+        startXI: playerList,
+      });
     }
 
     // 3. Last fallback
     else {
-      //players = this.generateFormation(team.formation, team);
+      players = playerList.map((player: any) => ({
+        ...player.player,
+
+        x: 50,
+        y: 50,
+      }));
     }
 
     // finds player statistics form API using Id
@@ -195,7 +203,7 @@ export class Minfo {
 
         side: home ? 'home' : 'away',
 
-        kit: p.pos === 'G' ? team.team.colors.goalkeeper : team.team.colors.player
+        kit: p.pos === 'G' ? team.team.colors.goalkeeper : team.team.colors.player,
       };
     });
   }
@@ -216,6 +224,22 @@ export class Minfo {
     if (!lineup) return [];
 
     return this.getPlayers(lineup, false);
+  });
+
+  // Returns the substitute players for the home team
+  homeSubstitutes = computed(() => {
+    const lineup = this.minfo_data()?.[0]?.lineups?.[0];
+
+    if (!lineup) return [];
+    return this.getPlayers(lineup, true, lineup.substitutes, false);
+  });
+
+  // Returns the substitute players for the away team
+  awaySubstitutes = computed(() => {
+    const lineup = this.minfo_data()?.[0]?.lineups?.[1];
+
+    if (!lineup) return [];
+    return this.getPlayers(lineup, false, lineup.substitutes, false);
   });
 
   // Generates player positions based on their grid values

@@ -269,9 +269,40 @@
     </div>
   }
 
-  @for (prating of minfo_data()[0].players[0].players; track prating.player.id) {
-    <p>{{ prating.player.name }} - Rating: {{ prating.statistics[0].games.rating }}</p>
-  }
+  <!-- loop that iterates over the substitutions and displays them -->
+  <div class="substitutions">
+    <!-- Home substitutes -->
+    <div class="sub-column">
+      @for (player of homeSubstitutes(); track player.id) {
+        <div class="substitute">
+          <span class="substitute-name">
+            {{ player.name }}
+          </span>
+          <span class="substitute-rating">
+            {{ player.rating ?? '-' }}
+          </span>
+        </div>
+      }
+    </div>
+
+    <!-- Away substitutes -->
+    <div class="sub-column">
+      @for (player of awaySubstitutes(); track player.id) {
+        <div class="substitute">
+          <span class="substitute-name">
+            {{ player.name }}
+          </span>
+          <span class="substitute-rating">
+            {{ player.rating ?? '-' }}
+          </span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!--  @for (prating of minfo_data()[0].players[0].players; track prating.player.id) {-->
+  <!--    <p>{{ prating.player.name }} - Rating: {{ prating.statistics[0].games.rating }}</p>-->
+  <!--  }-->
 }
 
 @if (activeTab() === 'match_info') {
