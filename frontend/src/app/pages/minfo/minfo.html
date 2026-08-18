@@ -226,6 +226,9 @@
           </div>
           <div class="player-name">
             {{ player.name }}
+            @for (icon of player.icons; track $index) {
+              <span>{{ icon }}</span>
+            }
             {{ player.rating }}
           </div>
         </div>
@@ -247,6 +250,9 @@
           </div>
           <div class="player-name">
             {{ player.name }}
+            @for (icon of player.icons; track $index) {
+              <span>{{ icon }}</span>
+            }
             {{ player.rating }}
           </div>
         </div>
@@ -277,6 +283,9 @@
         <div class="substitute">
           <span class="substitute-name">
             {{ player.name }}
+            @for (icon of player.icons; track $index) {
+              <span>{{ icon }}</span>
+            }
           </span>
           <span class="substitute-rating">
             {{ player.rating ?? '-' }}
@@ -291,6 +300,9 @@
         <div class="substitute">
           <span class="substitute-name">
             {{ player.name }}
+            @for (icon of player.icons; track $index) {
+              <span>{{ icon }}</span>
+            }
           </span>
           <span class="substitute-rating">
             {{ player.rating ?? '-' }}

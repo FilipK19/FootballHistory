@@ -204,6 +204,20 @@ export class Minfo {
         side: home ? 'home' : 'away',
 
         kit: p.pos === 'G' ? team.team.colors.goalkeeper : team.team.colors.player,
+
+        // Player events icons
+        icons: [
+          ...(statistics?.games?.minutes !== 90 && statistics?.games?.substitute === false
+            ? ['🔄']
+            : []), //starting IX
+          ...(statistics?.games?.minutes !== null && statistics?.games?.substitute === true
+            ? ['🔄']
+            : []), //substitutes
+          ...(statistics?.cards?.yellow === 1 ? ['🟨'] : []),
+          ...(statistics?.cards?.red === 1 ? ['🟥'] : []),
+          ...(statistics?.goals?.total > 0 ? ['⚽'] : []),
+          ...(statistics?.games?.captain === true ? ['C'] : []),
+        ],
       };
     });
   }
