@@ -214,6 +214,7 @@ def get_cached_or_fetch(file_path: Path, fetch_fn):
     }
 
 
+# Returns all matches for all five leagues for a selected season
 @app.get("/matches-all/{season}")
 async def get_all_matches(season: int):
 

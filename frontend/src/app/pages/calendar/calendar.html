@@ -2,13 +2,17 @@
 
 {{ seasonId }}
 
+@for (group of groupedMatches(); track group[0]) {
+  <h3>{{ group[0] }}</h3>
 
-@for (league of calendarData(); track league[0]) {
-
-  <h2>{{ league[0] }}</h2>
-
-  @for (match of league[1]; track match.fixture.id) {
-    <p>{{ match.teams.home.name }} vs {{ match.teams.away.name }}</p>
+  @for (match of group[1]; track match.fixture.id) {
+    <div>
+      <strong>{{ match.league.name }}</strong>
+      {{ match.teams.home.name }}
+      {{ match.goals.home }}
+      -
+      {{ match.goals.away }}
+      {{ match.teams.away.name }}
+    </div>
   }
-
 }
