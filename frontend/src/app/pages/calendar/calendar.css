@@ -42,3 +42,12 @@
 .day:hover {
   background: #f5f5f5;
 }
+
+.match-bar {
+  background: #aaa;
+  color: white;
+  font-size: 11px;
+  padding: 2px 4px;
+  margin-top: 2px;
+  border-radius: 3px;
+}

@@ -24,9 +24,20 @@
         }
 
         <!-- Actual days -->
-        @for (day of [].constructor(month.daysInMonth); track $index) {
+        @for (day of [].constructor(month.daysInMonth); track $index; let dayIndex = $index) {
           <div class="day">
-            {{ $index + 1 }}
+            <div class="day-number">
+              {{ dayIndex + 1 }}
+            </div>
+
+            @for (league of leagues; track league) {
+              @if (getMatchCount(getDate(month.month, dayIndex + 1), league) > 0) {
+                <div class="match-bar">
+                  {{ league }}
+                  {{ getMatchCount(getDate(month.month, dayIndex + 1), league) }}
+                </div>
+              }
+            }
           </div>
         }
       </div>

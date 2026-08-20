@@ -11,7 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class Calendar {
   seasonId: string = '';
-  calendarData = signal<any[]>([]);
+  calendarData = signal<Record<string, any[]>>({});
+  year = Number(this.seasonId);
+  leagues = ['premier-league', 'bundesliga', 'serie-a', 'la-liga', 'ligue1'];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +31,7 @@ export class Calendar {
     });
   }
 
+  // Group matches by date
   groupedMatches = computed(() => {
     const groups: Record<string, any[]> = {};
 
@@ -43,23 +46,38 @@ export class Calendar {
         groups[date].push(match);
       }
     }
-
     return Object.entries(groups);
   });
 
+  // Generate calendar months
   calendarMonths = computed(() => {
-  const year = Number(this.seasonId);
+    const year = 2024;
 
-  return Array.from({ length: 12 }, (_, month) => {
-    const firstDate = new Date(year, month, 1);
-    const lastDate = new Date(year, month + 1, 0);
+    return Array.from({ length: 12 }, (_, month) => {
+      const firstDate = new Date(year, month, 1);
+      const lastDate = new Date(year, month + 1, 0);
 
-    return {
-      month,
-      name: firstDate.toLocaleString('en', { month: 'long' }),
-      daysInMonth: lastDate.getDate(),
-      firstDay: (firstDate.getDay() + 6) % 7 // Adjusting to make Monday the first day of the week
-    };
+      return {
+        month,
+        name: firstDate.toLocaleString('en', { month: 'long' }),
+        daysInMonth: lastDate.getDate(),
+        firstDay: (firstDate.getDay() + 6) % 7, // Adjusting to make Monday the first day of the week
+      };
+    });
   });
-});
+
+  // Get match count for a specific date and league
+  getMatchCount(date: string, league: string): number {
+    const matches = this.calendarData()[league];
+
+    if (!matches) {
+      return 0;
+    }
+    return matches.filter((match: any) => match.fixture.date.startsWith(date)).length;
+  }
+
+  // Format date as YYYY-MM-DD
+  getDate(month: number, day: number): string {
+    return `${2024}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  }
 }
