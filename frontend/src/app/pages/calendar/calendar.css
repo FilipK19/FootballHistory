@@ -1,0 +1,44 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.month {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.month h2 {
+  text-align: center;
+  margin: 0;
+  padding: 12px;
+}
+
+.weekdays,
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekdays div {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+.day,
+.empty {
+  min-height: 100px;
+  border-top: 1px solid #eee;
+  border-right: 1px solid #eee;
+}
+
+.day {
+  padding: 5px;
+}
+
+.day:hover {
+  background: #f5f5f5;
+}

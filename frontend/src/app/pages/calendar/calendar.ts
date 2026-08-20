@@ -46,4 +46,20 @@ export class Calendar {
 
     return Object.entries(groups);
   });
+
+  calendarMonths = computed(() => {
+  const year = Number(this.seasonId);
+
+  return Array.from({ length: 12 }, (_, month) => {
+    const firstDate = new Date(year, month, 1);
+    const lastDate = new Date(year, month + 1, 0);
+
+    return {
+      month,
+      name: firstDate.toLocaleString('en', { month: 'long' }),
+      daysInMonth: lastDate.getDate(),
+      firstDay: (firstDate.getDay() + 6) % 7 // Adjusting to make Monday the first day of the week
+    };
+  });
+});
 }
