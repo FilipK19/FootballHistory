@@ -5,7 +5,7 @@
 <div class="calendar">
   @for (month of calendarMonths(); track month.month) {
     <div class="month">
-      <h2>{{ month.name }}</h2>
+      <h2>{{ month.name }} {{ month.year }}</h2>
 
       <div class="weekdays">
         <div>Mon</div>
@@ -31,10 +31,10 @@
             </div>
 
             @for (league of leagues; track league) {
-              @if (getMatchCount(getDate(month.month, dayIndex + 1), league) > 0) {
+              @if (getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) > 0) {
                 <div class="match-bar">
                   {{ league }}
-                  {{ getMatchCount(getDate(month.month, dayIndex + 1), league) }}
+                  {{ getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) }}
                 </div>
               }
             }

@@ -51,14 +51,19 @@ export class Calendar {
 
   // Generate calendar months
   calendarMonths = computed(() => {
-    const year = 2024;
+    const startYear = 2024;
 
-    return Array.from({ length: 12 }, (_, month) => {
+    return Array.from({ length: 10 }, (_, index) => {
+      const month = (7 + index) % 12;
+
+      const year = index < 5 ? startYear : startYear + 1;
+
       const firstDate = new Date(year, month, 1);
       const lastDate = new Date(year, month + 1, 0);
 
       return {
         month,
+        year,
         name: firstDate.toLocaleString('en', { month: 'long' }),
         daysInMonth: lastDate.getDate(),
         firstDay: (firstDate.getDay() + 6) % 7, // Adjusting to make Monday the first day of the week
@@ -77,7 +82,7 @@ export class Calendar {
   }
 
   // Format date as YYYY-MM-DD
-  getDate(month: number, day: number): string {
-    return `${2024}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  getDate(year: number, month: number, day: number): string {
+    return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   }
 }
