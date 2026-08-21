@@ -51,7 +51,7 @@ export class Calendar {
 
   // Generate calendar months
   calendarMonths = computed(() => {
-    const startYear = 2024;
+    const startYear = this.seasonId ? Number(this.seasonId) : new Date().getFullYear();
 
     return Array.from({ length: 10 }, (_, index) => {
       const month = (7 + index) % 12;
