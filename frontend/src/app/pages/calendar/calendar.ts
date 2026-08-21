@@ -49,26 +49,49 @@ export class Calendar {
     return Object.entries(groups);
   });
 
-  // Generate calendar months
+  // Generate calendar months that contain matches during the season
   calendarMonths = computed(() => {
-    const startYear = this.seasonId ? Number(this.seasonId) : new Date().getFullYear();
+    const startYear = this.seasonId ? Number(this.seasonId) : new Date().getFullYear(); // selected season
+    const data = this.calendarData();
+    const months = new Set<string>();
 
-    return Array.from({ length: 10 }, (_, index) => {
-      const month = (7 + index) % 12;
+    for (let i = 0; i < 10; i++) {
+      const month = (7 + i) % 12;
+      const year = i < 5 ? startYear : startYear + 1;
 
-      const year = index < 5 ? startYear : startYear + 1;
+      months.add(`${year}-${month}`);
+    }
 
-      const firstDate = new Date(year, month, 1);
-      const lastDate = new Date(year, month + 1, 0);
+    // Add aditional months if they contain matches in the data
+    for (const matches of Object.values(data)) {
+      for (const match of matches) {
+        const date = new Date(match.fixture.date);
 
-      return {
-        month,
-        year,
-        name: firstDate.toLocaleString('en', { month: 'long' }),
-        daysInMonth: lastDate.getDate(),
-        firstDay: (firstDate.getDay() + 6) % 7, // Adjusting to make Monday the first day of the week
-      };
-    });
+        const year = date.getUTCFullYear();
+        const month = date.getUTCMonth();
+
+        months.add(`${year}-${month}`);
+      }
+    }
+
+    return [...months]
+      .map((key) => {
+        const [year, month] = key.split('-').map(Number);
+
+        const firstDate = new Date(year, month, 1);
+        const lastDate = new Date(year, month + 1, 0);
+
+        return {
+          month,
+          year,
+          name: firstDate.toLocaleString('en', { month: 'long' }),
+          daysInMonth: lastDate.getDate(),
+          firstDay: (firstDate.getDay() + 6) % 7, // Adjusting to make Monday the first day of the week
+        };
+      })
+      .sort((a, b) => {
+        return new Date(a.year, a.month).getTime() - new Date(b.year, b.month).getTime();
+      });
   });
 
   // Get match count for a specific date and league
