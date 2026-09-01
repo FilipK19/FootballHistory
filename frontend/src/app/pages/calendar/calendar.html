@@ -72,7 +72,10 @@
 
       <div class="matches">
         @for (match of selectedMatches(); track match.fixture.id) {
-          <div class="match">
+          <button
+            class="match"
+            [routerLink]="['/league', selectedLeague(), seasonId, 'matches', match.fixture.id]"
+          >
             <div class="team">
               {{ match.teams.home.name }}
             </div>
@@ -86,7 +89,7 @@
             <div class="team">
               {{ match.teams.away.name }}
             </div>
-          </div>
+          </button>
         }
       </div>
     </div>
