@@ -2,60 +2,53 @@
 
 {{ seasonId }}
 
+@let month = currentMonth();
+
 <div class="calendar">
-  @for (month of calendarMonths(); track month.month) {
-    <div class="month">
+  <div class="month">
+    <div class="month-header">
       <h2>{{ month.name }} {{ month.year }}</h2>
 
-      <div class="weekdays">
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-        <div>Sun</div>
+      <div class="month-buttons">
+        <button (click)="previousMonth()" [disabled]="selectedMonth() === 0">←</button>
+
+        <button (click)="nextMonth()" [disabled]="selectedMonth() === calendarMonths().length - 1">
+          →
+        </button>
       </div>
+    </div>
 
-      <div class="days">
-        <!-- Empty spaces before first day -->
-        @for (empty of [].constructor(month.firstDay); track $index) {
-          <div class="empty"></div>
-        }
+    <div class="weekdays">
+      <div>Mon</div>
+      <div>Tue</div>
+      <div>Wed</div>
+      <div>Thu</div>
+      <div>Fri</div>
+      <div>Sat</div>
+      <div>Sun</div>
+    </div>
 
-        <!-- Actual days -->
-        @for (day of [].constructor(month.daysInMonth); track $index; let dayIndex = $index) {
-          <div class="day">
-            <div class="day-number">
-              {{ dayIndex + 1 }}
-            </div>
+    <div class="days">
+      @for (empty of [].constructor(month.firstDay); track $index) {
+        <div class="empty"></div>
+      }
 
-            @for (league of leagues; track league) {
-              @if (getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) > 0) {
-                <div class="match-bar">
-                  {{ league }}
-                  {{ getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) }}
-                </div>
-              }
-            }
+      @for (day of [].constructor(month.daysInMonth); track $index; let dayIndex = $index) {
+        <div class="day">
+          <div class="day-number">
+            {{ dayIndex + 1 }}
           </div>
-        }
-      </div>
+
+          @for (league of leagues; track league) {
+            @if (getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) > 0) {
+              <div class="match-bar">
+                {{ league }}
+                {{ getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) }}
+              </div>
+            }
+          }
+        </div>
+      }
     </div>
-  }
+  </div>
 </div>
-
-@for (group of groupedMatches(); track group[0]) {
-  <h3>{{ group[0] }}</h3>
-
-  @for (match of group[1]; track match.fixture.id) {
-    <div>
-      <strong>{{ match.league.name }}</strong>
-      {{ match.teams.home.name }}
-      {{ match.goals.home }}
-      -
-      {{ match.goals.away }}
-      {{ match.teams.away.name }}
-    </div>
-  }
-}

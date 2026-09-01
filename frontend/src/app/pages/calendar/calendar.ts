@@ -14,6 +14,7 @@ export class Calendar {
   calendarData = signal<Record<string, any[]>>({});
   year = Number(this.seasonId);
   leagues = ['premier-league', 'bundesliga', 'serie-a', 'la-liga', 'ligue1'];
+  selectedMonth = signal(0);
 
   constructor(
     private route: ActivatedRoute,
@@ -107,5 +108,22 @@ export class Calendar {
   // Format date as YYYY-MM-DD
   getDate(year: number, month: number, day: number): string {
     return `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  }
+
+  // Get current month
+  currentMonth = computed(() => {
+    return this.calendarMonths()[this.selectedMonth()];
+  });
+
+  nextMonth() {
+    if (this.selectedMonth() < this.calendarMonths().length - 1) {
+      this.selectedMonth.update(i => i + 1);
+    }
+  }
+
+  previousMonth() {
+    if (this.selectedMonth() > 0) {
+      this.selectedMonth.update(i => i - 1);
+    }
   }
 }
