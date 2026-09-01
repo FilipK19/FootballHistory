@@ -16,6 +16,9 @@ export class Calendar {
   leagues = ['premier-league', 'bundesliga', 'serie-a', 'la-liga', 'ligue1'];
   selectedMonth = signal(0);
 
+  selectedDate = signal<string | null>(null);
+  selectedLeague = signal<string | null>(null);
+
   constructor(
     private route: ActivatedRoute,
     private api: Api,
@@ -117,13 +120,47 @@ export class Calendar {
 
   nextMonth() {
     if (this.selectedMonth() < this.calendarMonths().length - 1) {
-      this.selectedMonth.update(i => i + 1);
+      this.selectedMonth.update((i) => i + 1);
     }
   }
 
   previousMonth() {
     if (this.selectedMonth() > 0) {
-      this.selectedMonth.update(i => i - 1);
+      this.selectedMonth.update((i) => i - 1);
     }
   }
+
+  // Machday games popup
+  showPopup = computed(() => {
+    return this.selectedDate() !== null && this.selectedLeague() !== null;
+  });
+
+  // Open and close match popup
+  openMatches(date: string, league: string) {
+    this.selectedDate.set(date);
+    this.selectedLeague.set(league);
+  }
+
+  closeMatches() {
+    this.selectedDate.set(null);
+    this.selectedLeague.set(null);
+  }
+
+  // Get matches for the selected date and league for popup
+  selectedMatches = computed(() => {
+    const date = this.selectedDate();
+    const league = this.selectedLeague();
+
+    if (!date || !league) {
+      return [];
+    }
+
+    const matches = this.calendarData()[league];
+
+    if (!matches) {
+      return [];
+    }
+
+    return matches.filter((match: any) => match.fixture.date.startsWith(date));
+  });
 }

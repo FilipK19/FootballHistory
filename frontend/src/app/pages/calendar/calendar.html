@@ -41,10 +41,13 @@
 
           @for (league of leagues; track league) {
             @if (getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) > 0) {
-              <div class="match-bar">
+              <button
+                class="match-bar"
+                (click)="openMatches(getDate(month.year, month.month, dayIndex + 1), league)"
+              >
                 {{ league }}
                 {{ getMatchCount(getDate(month.year, month.month, dayIndex + 1), league) }}
-              </div>
+              </button>
             }
           }
         </div>
@@ -52,3 +55,40 @@
     </div>
   </div>
 </div>
+
+<!-- Popup for matchday matches -->
+@if (showPopup()) {
+  <div class="popup-overlay" (click)="closeMatches()">
+    <div class="popup" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="closeMatches()">×</button>
+
+      <h2>
+        {{ selectedLeague() }}
+      </h2>
+
+      <p>
+        {{ selectedDate() }}
+      </p>
+
+      <div class="matches">
+        @for (match of selectedMatches(); track match.fixture.id) {
+          <div class="match">
+            <div class="team">
+              {{ match.teams.home.name }}
+            </div>
+
+            <div class="score">
+              {{ match.goals.home }}
+              -
+              {{ match.goals.away }}
+            </div>
+
+            <div class="team">
+              {{ match.teams.away.name }}
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
