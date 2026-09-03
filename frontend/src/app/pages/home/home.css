@@ -5,10 +5,11 @@
   flex-direction: column;
 
   gap: 0px;
-  min-height: 80vh;
+  min-height: 70vh;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: 'Cinzel', serif;
   font-weight: 400;
   font-size: 4rem;
@@ -17,4 +18,11 @@ h1, h2 {
 
 h2 {
   font-size: 40px;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: auto;
 }
