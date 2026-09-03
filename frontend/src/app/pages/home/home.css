@@ -1,0 +1,20 @@
+.ptitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  gap: 0px;
+  min-height: 80vh;
+}
+
+h1, h2 {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+  font-size: 4rem;
+  margin: 0;
+}
+
+h2 {
+  font-size: 40px;
+}
