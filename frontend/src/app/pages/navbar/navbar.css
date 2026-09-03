@@ -3,4 +3,6 @@
   display: flex;
   gap: 12px;
   height: 35px;
+  font-size: 18px;
+  padding: 5px 10px;
 }

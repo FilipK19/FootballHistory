@@ -6,6 +6,7 @@
 
   gap: 0px;
   min-height: 75vh;
+  cursor: pointer;
 }
 
 h1,
