@@ -1,31 +1,65 @@
-.buttons {
-    justify-content: center;
-    text-align: center;
-    display: flex;
-    gap: 50px;
-    flex-wrap: wrap;
-    margin-top:70px;
+.buttons-formation button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.buttons button {
-    width: 200px;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.buttons-formation {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #182E6F;
-    color: white;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 50px;
 }
 
-.buttons button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.player-bar {
+  width: 400px;
+  height: 70px;
+
+  position: relative;
+
+  padding: 0;
+  background: #182e6f;
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+  font-size: 24px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.player-bar app-player {
+  position: absolute;
+  top: 50%;
+
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.player-bar span {
+  position: relative;
+  z-index: 10;
+}
+
+.player-bar app-player:nth-child(2) {
+  left: 30px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.player-bar app-player:nth-child(3) {
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.player-bar app-player:nth-child(4) {
+  right: 30px;
+  transform: translateY(-50%);
+  z-index: 0;
 }
