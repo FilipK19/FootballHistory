@@ -22,9 +22,9 @@
   position: relative;
 
   padding: 0;
-  background: #182e6f;
+  background: #0047ab;
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
 
   cursor: pointer;
   font-size: 24px;
@@ -47,13 +47,14 @@
   position: absolute;
   top: 50%;
 
-  opacity: 0.9;
+  opacity: 0.8;
   pointer-events: none;
 }
 
 .player-bar span {
   position: relative;
   z-index: 10;
+  color: #ffffff;
 }
 
 .player-bar app-player:nth-child(2) {

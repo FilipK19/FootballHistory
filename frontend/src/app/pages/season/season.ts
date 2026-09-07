@@ -10,5 +10,5 @@ import { Player } from '../../assets/player/player';
   styleUrl: './season.css',
 })
 export class Season {
-  playerColor = '#ffffff';
+  playerColor = '#00008b';
 }
