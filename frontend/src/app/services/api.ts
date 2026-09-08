@@ -27,9 +27,15 @@ export class Api {
     );
   }
 
-    getCalendarInfo(seasonId: string) {
+  getCalendarInfo(seasonId: string) {
     return this.http.get(
       `http://127.0.0.1:8001/matches-all/${seasonId}`
+    );
+  }
+
+  getAllMinfo() {
+    return this.http.get(
+      `http://127.0.0.1:8001/minfo-all`
     );
   }
 }

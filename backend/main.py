@@ -238,3 +238,46 @@ async def get_all_matches(season: int):
             result[league_name] = json.load(file)["response"]
 
     return result
+
+
+# Returns all match info for all five leagues for all three seasons
+@app.get("/minfo-all")
+async def get_all_minfo():
+
+    result = {}
+
+    for season_short in ["22", "23", "24"]:
+
+        season_key = f"season{season_short}"
+        result[season_key] = {}
+
+        for league_name, league_info in LEAGUE_BY_NAME.items():
+
+            league_code = league_info["code"]
+
+            minfo_path = (
+                BASE_DIR
+                / "data"
+                / f"season{season_short}"
+                / "minfo"
+            )
+
+            # If the minfo folder doesn't exist, skip it
+            if not minfo_path.exists():
+                continue
+
+            matches = []
+
+            # Find all files belonging to this league and season
+            pattern = f"{league_code}{season_short}_*.json"
+
+            for file_path in minfo_path.glob(pattern):
+
+                with open(file_path, "r", encoding="utf-8") as file:
+                    matches.append(json.load(file))
+
+            # Only add the league if it actually has saved matches
+            if matches:
+                result[season_key][league_name] = matches
+
+    return result
