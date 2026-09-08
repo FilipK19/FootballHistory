@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { Player } from '../../assets/player/player';
@@ -11,6 +11,7 @@ import { Player } from '../../assets/player/player';
 })
 export class Season {
   playerColor = '#00008b';
+  selectedSeason = signal(1);
 
   scrollToInfo() {
     document.getElementById('info-section')?.scrollIntoView({

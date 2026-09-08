@@ -135,6 +135,7 @@
   padding: 0;
   border: none;
   background: #0047ab;
+  border-radius: 25px;
 
   cursor: pointer;
   font-size: 24px;
@@ -164,4 +165,8 @@
   right: 1px;
   transform: translateY(-50%);
   z-index: 0;
+}
+
+.subs-bar.selected {
+  background: #00008b;
 }

@@ -31,22 +31,44 @@
 
 <div id="info-section">
   <div class="subs-formation">
-    <button class="subs-bar">
+    <button
+      class="subs-bar"
+      [class.selected]="selectedSeason() === 1"
+      (click)="selectedSeason.set(1)"
+    >
       <span>Season 24/25</span>
       <app-player [color]="playerColor"></app-player>
       <app-player [color]="playerColor"></app-player>
     </button>
-    <button class="subs-bar">
+    <button
+      class="subs-bar"
+      [class.selected]="selectedSeason() === 2"
+      (click)="selectedSeason.set(2)"
+    >
       <span>Season 23/24</span>
       <app-player [color]="playerColor"></app-player>
       <app-player [color]="playerColor"></app-player>
     </button>
-    <button class="subs-bar">
+    <button
+      class="subs-bar"
+      [class.selected]="selectedSeason() === 3"
+      (click)="selectedSeason.set(3)"
+    >
       <span>Season 22/23</span>
       <app-player [color]="playerColor"></app-player>
       <app-player [color]="playerColor"></app-player>
     </button>
   </div>
-  <h2>Some text</h2>
-  <p>This is the new text for now.</p>
+  
+  @if (selectedSeason() === 1) {
+    <h2>Some text</h2>
+  }
+
+  @if (selectedSeason() === 2) {
+    <h2>Some text2</h2>
+  }
+
+  @if (selectedSeason() === 3) {
+    <h2>Some text3</h2>
+  }
 </div>
