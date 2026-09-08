@@ -40,6 +40,7 @@
       <app-player [color]="playerColor"></app-player>
       <app-player [color]="playerColor"></app-player>
     </button>
+
     <button
       class="subs-bar"
       [class.selected]="selectedSeason() === 2"
@@ -49,6 +50,7 @@
       <app-player [color]="playerColor"></app-player>
       <app-player [color]="playerColor"></app-player>
     </button>
+
     <button
       class="subs-bar"
       [class.selected]="selectedSeason() === 3"
@@ -59,16 +61,37 @@
       <app-player [color]="playerColor"></app-player>
     </button>
   </div>
-  
-  @if (selectedSeason() === 1) {
-    <h2>Some text</h2>
-  }
 
-  @if (selectedSeason() === 2) {
-    <h2>Some text2</h2>
-  }
+  <h2>
+    @switch (selectedSeason()) {
+      @case (1) {
+        Season 24/25
+      }
+      @case (2) {
+        Season 23/24
+      }
+      @case (3) {
+        Season 22/23
+      }
+    }
+  </h2>
 
-  @if (selectedSeason() === 3) {
-    <h2>Some text3</h2>
+  @if ((selectedSeasonData() | keyvalue).length > 0) {
+    <div class="matches">
+      @for (league of selectedSeasonData() | keyvalue; track league.key) {
+        <h2>{{ league.key }}</h2>
+
+        @for (match of league.value; track $index) {
+          <div class="match">
+            {{ match.response[0].teams.home.name }}
+            {{ match.response[0].goals.home }} -
+            {{ match.response[0].goals.away }}
+            {{ match.response[0].teams.away.name }}
+          </div>
+        }
+      }
+    </div>
+  } @else {
+    <p>No saved matches</p>
   }
 </div>
