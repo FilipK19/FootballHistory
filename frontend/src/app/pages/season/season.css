@@ -75,7 +75,7 @@
   z-index: 0;
 }
 
- /* four players button */
+/* four players button */
 .player-bar2 app-player:nth-child(2) {
   left: 25px;
 }
@@ -94,8 +94,74 @@
   z-index: 0;
 }
 
- /* bottom button */
+/* bottom button */
 .player-bargk app-player:nth-child(2) {
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* Recent Matches */
+#info-section {
+  margin-top: 200px;
+  padding: 50px;
+  min-height: 500px;
+}
+
+.subs-formation {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 0px;
+
+  background: #0047ab;
+  border: none;
+  border-radius: 25px;
+
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subs-bar {
+  width: 200px;
+  height: 70px;
+
+  position: relative;
+
+  padding: 0;
+  border: none;
+  background: #0047ab;
+
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.subs-bar app-player {
+  position: absolute;
+  top: 50%;
+
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.subs-bar span {
+  position: relative;
+  z-index: 10;
+  color: #ffffff;
+}
+
+.subs-bar app-player:nth-child(2) {
+  left: 1px;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.subs-bar app-player:nth-child(3) {
+  right: 1px;
+  transform: translateY(-50%);
+  z-index: 0;
 }

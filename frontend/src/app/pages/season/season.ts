@@ -11,4 +11,11 @@ import { Player } from '../../assets/player/player';
 })
 export class Season {
   playerColor = '#00008b';
+
+  scrollToInfo() {
+    document.getElementById('info-section')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
 }
