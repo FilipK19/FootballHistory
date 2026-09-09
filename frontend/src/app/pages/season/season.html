@@ -83,10 +83,13 @@
 
         @for (match of league.value; track $index) {
           <div class="match">
-            {{ match.response[0].teams.home.name }}
-            {{ match.response[0].goals.home }} -
-            {{ match.response[0].goals.away }}
-            {{ match.response[0].teams.away.name }}
+            <button class="match-button"
+                [routerLink]="['/league', league.key, match.response[0].league.season, 'matches', match.response[0].fixture.id]">
+              {{ match.response[0].teams.home.name }}
+              {{ match.response[0].goals.home }} -
+              {{ match.response[0].goals.away }}
+              {{ match.response[0].teams.away.name }}
+            </button>
           </div>
         }
       }
