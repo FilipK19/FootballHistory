@@ -79,7 +79,7 @@
   @if ((selectedSeasonData() | keyvalue).length > 0) {
     <div class="matches">
       @for (league of selectedSeasonData() | keyvalue; track league.key) {
-        <h2>{{ league.key }}</h2>
+        <h2>{{ getLeagueName(league.key) }}</h2>
 
         @for (match of league.value; track $index) {
           <div class="match">

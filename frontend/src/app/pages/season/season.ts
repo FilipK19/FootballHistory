@@ -46,4 +46,17 @@ export class Season {
   selectedSeasonData = computed(() =>
     this.allMinfoData()[this.selectedSeasonKey()] ?? {}
   );
+
+  // Returns the display name for a given league key
+  getLeagueName(league: string): string {
+    const names: Record<string, string> = {
+      'premier-league': 'Premier League',
+      'bundesliga': 'Bundesliga',
+      'la-liga': 'La Liga',
+      'serie-a': 'Serie A',
+      'ligue1': 'Ligue 1'
+    };
+
+    return names[league] ?? league;
+  }
 }
