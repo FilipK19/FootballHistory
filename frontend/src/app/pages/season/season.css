@@ -182,7 +182,7 @@
   display: block;
   margin-bottom: 10px;
 
-  width: 500px;
+  width: 550px;
   height: 60px;
 
   border: none;
@@ -206,3 +206,17 @@
   z-index: -1;
 }
 
+
+.match-button, .subs-bar, .player-bar, h1, h2 {
+  font-family: 'Cinzel', serif;
+  font-weight: 500;
+}
+
+h1 {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+
+  margin-top: -10px;
+  padding-bottom: 30px;
+}
