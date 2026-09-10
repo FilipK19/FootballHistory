@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Navbar } from './pages/navbar/navbar';
 
 @Component({
@@ -10,4 +10,6 @@ import { Navbar } from './pages/navbar/navbar';
 })
 export class App {
   protected readonly title = signal('frontend');
+
+  constructor(public router: Router) {}
 }
