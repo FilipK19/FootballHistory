@@ -1,14 +1,71 @@
-
 <div class="buttons">
-    <button [routerLink]="['/league', 'premier-league', seasonId]">Premier League</button>
+  <button [routerLink]="['/league', 'premier-league', seasonId]">Premier League</button>
 
-    <button [routerLink]="['/league', 'la-liga', seasonId]">La Liga</button>
+  <button [routerLink]="['/league', 'la-liga', seasonId]">La Liga</button>
 
-    <button [routerLink]="['/league', 'bundesliga', seasonId]">Bundesliga</button>
+  <button [routerLink]="['/league', 'bundesliga', seasonId]">Bundesliga</button>
 
-    <button [routerLink]="['/league', 'serie-a', seasonId]">Serie A</button>
+  <button [routerLink]="['/league', 'serie-a', seasonId]">Serie A</button>
 
-    <button [routerLink]="['/league', 'ligue1', seasonId]">Ligue 1</button>
+  <button [routerLink]="['/league', 'ligue1', seasonId]">Ligue 1</button>
 </div>
 
 <button [routerLink]="['/calendar', seasonId]">Calendar</button>
+
+<div class="hex-formation">
+  <div class="main-hex">
+    <div>
+      <button class="hex-button hex hex1">T1</button>
+    </div>
+    <div>
+      <button class="hex-button hex hex2">T2</button>
+      <button class="hex-button hex hex3">T3</button>
+    </div>
+    <div>
+      <button class="hex-button hex hex4">T4</button>
+      <button class="hex-button hex hex5">T5</button>
+    </div>
+    <div>
+      <button class="hex-button hex hex6">T6</button>
+    </div>
+  </div>
+
+  <div class="background-hex">
+    <div>
+      <div class="hex-wrapper b-hex1">
+        <div class="b-hex border-hex"></div>
+        <div class="b-hex hex-shape"></div>
+      </div>
+      <div class="hex-wrapper b-hex2">
+        <div class="b-hex border-hex"></div>
+        <div class="b-hex hex-shape"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="hex-wrapper b-hex3">
+        <div class="b-hex border-hex"></div>
+        <div class="b-hex hex-shape"></div>
+      </div>
+      <div class="hex-wrapper b-hex4">
+        <div class="b-hex border-hex"></div>
+        <div class="b-hex hex-shape"></div>
+      </div>
+      <div class="hex-wrapper b-hex5">
+        <div class="b-hex border-hex"></div>
+        <div class="b-hex hex-shape"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="hex-wrapper b-hex6">
+        <div class="b-hex border-hex"></div>
+        <div class="b-hex hex-shape"></div>
+      </div>
+      <div class="hex-wrapper b-hex7">
+        <div class="b-hex border-hex"></div>
+        <div class="b-hex hex-shape"></div>
+      </div>
+    </div>
+  </div>
+</div>

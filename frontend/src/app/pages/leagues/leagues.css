@@ -1,4 +1,127 @@
 .buttons {
-    justify-content: center;
-    text-align: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hex-formation, .main-hex, .background-hex {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hex-button {
+  width: 160px;
+  height: 185px;
+
+  border: none;
+  background: #182e6f;
+  color: white;
+
+  cursor: pointer;
+}
+
+.hex {
+  clip-path: polygon(
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
+    0% 25%
+  );
+}
+
+/* Main hexagon formation */
+.hex1 {
+  transform: translateY(0px);
+}
+
+.hex2 {
+  transform: translate(-80px, -93px);
+}
+
+.hex3 {
+  transform: translate(80px, -93px);
+}
+
+.hex4 {
+  transform: translate(-80px, -93px);
+}
+
+.hex5 {
+  transform: translate(80px, -93px);
+}
+
+.hex6 {
+  transform: translateY(-186px);
+}
+
+/* Background hexagons */
+.background-hex > div {
+  display: flex;
+  flex-direction: row;
+}
+
+.hex-shape {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  background: #0047ab;
+  color: white;
+  transform: scale(0.99);
+}
+
+.hex-wrapper {
+  position: relative;
+  width: 80px;
+  height: 92.5px;
+}
+
+.border-hex {
+  background: white;
+}
+
+.b-hex {
+  position: absolute;
+  inset: 0;
+
+  clip-path: polygon(
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
+    0% 25%
+  );
+}
+
+.b-hex1 {
+  transform: translate(0px, -578px);
+}
+
+.b-hex2 {
+  transform: translate(0px, -578px);
+}
+
+.b-hex3 {
+  transform: translate(0px, -601.7px);
+}
+
+.b-hex4 {
+  transform: translate(0px, -601.7px);
+}
+
+.b-hex5 {
+  transform: translate(0px, -601.7px);
+}
+
+.b-hex6 {
+  transform: translate(0px, -625.5px);
+}
+
+.b-hex7 {
+  transform: translate(0px, -625.5px);
 }
