@@ -16,7 +16,7 @@
   height: 185px;
 
   border: none;
-  background: #182e6f;
+  background: #0047ab;
   color: white;
 
   cursor: pointer;
@@ -72,7 +72,7 @@
   height: 100%;
 
   border: none;
-  background: #0047ab;
+  background: #182e6f;
   color: white;
   transform: scale(0.99);
 }
