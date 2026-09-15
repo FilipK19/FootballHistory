@@ -38,27 +38,27 @@
 
 /* Main hexagon formation */
 .hex1 {
-  transform: translateY(0px);
+  transform: translateY(376px); /* Adjusted the original un-absolute position by 376px */
 }
 
 .hex2 {
-  transform: translate(-80px, -93px);
+  transform: translate(-80px, 283px);
 }
 
 .hex3 {
-  transform: translate(80px, -93px);
+  transform: translate(80px, 283px);
 }
 
 .hex4 {
-  transform: translate(-80px, -93px);
+  transform: translate(-80px, 283px);
 }
 
 .hex5 {
-  transform: translate(80px, -93px);
+  transform: translate(80px, 283px);
 }
 
 .hex6 {
-  transform: translateY(-186px);
+  transform: translateY(190px);
 }
 
 /* Background hexagons */
@@ -102,29 +102,39 @@
 }
 
 .b-hex1 {
-  transform: translate(0px, -578px);
+  transform: translate(0px, 306.3px); /* Adjusted the original un-absolute position by bout 885px */
 }
 
 .b-hex2 {
-  transform: translate(0px, -578px);
+  transform: translate(0px, 306.3px);
 }
 
 .b-hex3 {
-  transform: translate(0px, -601.7px);
+  transform: translate(0px, 283.3px);
 }
 
 .b-hex4 {
-  transform: translate(0px, -601.7px);
+  transform: translate(0px, 283.3px);
 }
 
 .b-hex5 {
-  transform: translate(0px, -601.7px);
+  transform: translate(0px, 283.3px);
 }
 
 .b-hex6 {
-  transform: translate(0px, -625.5px);
+  transform: translate(0px, 259.5px);
 }
 
 .b-hex7 {
-  transform: translate(0px, -625.5px);
+  transform: translate(0px, 259.5px);
+}
+
+/* Positioning of main hexagon and background hexagons */
+.main-hex {
+  position: absolute;
+}
+
+.background-hex { /* Moved background hex formation to layer below */
+  position: absolute;
+  z-index: -1;
 }
