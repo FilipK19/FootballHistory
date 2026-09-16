@@ -138,3 +138,14 @@
   position: absolute;
   z-index: -1;
 }
+
+h1 {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+
+  margin-top: -10px;
+  padding-bottom: 30px;
+  font-family: 'Cinzel', serif;
+  font-weight: 500;
+}
