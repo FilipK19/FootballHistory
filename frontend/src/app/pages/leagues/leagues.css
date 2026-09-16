@@ -148,4 +148,5 @@ h1 {
   padding-bottom: 30px;
   font-family: 'Cinzel', serif;
   font-weight: 500;
+  z-index: 10;
 }
