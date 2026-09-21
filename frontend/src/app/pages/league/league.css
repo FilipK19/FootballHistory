@@ -1,10 +1,25 @@
 p {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
 }
 
 .l-table {
+  display: flex;
   justify-content: center;
   text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.l-row {
+  background-color: gray;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 800px;
+  min-height: 15px;
+  border-radius: 0px;
 }
