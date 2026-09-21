@@ -3,3 +3,8 @@ p {
     font-size: 16px;
     color: #333;
 }
+
+.l-table {
+  justify-content: center;
+  text-align: center;
+}

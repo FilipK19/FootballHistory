@@ -4,12 +4,14 @@
     <button [routerLink]="['/leagueinfo', leagueId]">League Info</button>
 </div>
 
-
-@for (team of table(); track team.team.id) {
-  <p>{{ team.rank }} - <button [routerLink]="['/clubinfo', team.team.name]">{{ team.team.name }}</button></p>
-  <p>Points: {{ team.points }}</p>
-  <p>Played: {{ team.all.played }} Win: {{ team.all.win }} Draw: {{ team.all.draw }} Lose: {{ team.all.lose }}</p>
-  <p>Goals for: {{ team.all.goals.for }} Goals against: {{ team.all.goals.against }}</p>
-}
-
+<div class="l-table">
+  <p>Position   |     Points    |   matches played    |   win   |   draw    |   lose    |   goals for   |   goals against</p>
+  @for (team of table(); track team.team.id) {
+    <div class="l-row">
+      {{ team.rank }} - <button [routerLink]="['/clubinfo', team.team.name]">{{ team.team.name }}</button> |
+      {{ team.points }} |
+      {{ team.all.played }} {{ team.all.win }} {{ team.all.draw }} {{ team.all.lose }} |
+      {{ team.all.goals.for }} {{ team.all.goals.against }}
+    </div>}
+</div>
 <p>League ID: {{ leagueId }}</p>
