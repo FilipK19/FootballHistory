@@ -19,7 +19,7 @@ p {
   grid-template-columns:
     6px  /* Qualification indicator */
     70px /* Position */
-    minmax(150px, 2fr) /* Team */
+    minmax(250px, 2fr) /* Team name */
     repeat(7, minmax(55px, 1fr));
   align-items: center;
   text-align: center;
