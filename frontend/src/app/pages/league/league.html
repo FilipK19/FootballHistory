@@ -4,6 +4,8 @@
   <button [routerLink]="['/leagueinfo', leagueId]">League Info</button>
 </div>
 
+<h1>{{ leagueName() }}, season {{ leagueSeason() }}, <img [src]="leagueLogo()" alt="League Logo" /></h1>
+
 <div class="l-table">
   <div class="l-header">
     <div></div>

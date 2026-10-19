@@ -16,6 +16,9 @@ export class League implements OnInit {
   table = signal<any[]>([]);
   leagueId: string | null = '';
   seasonId: string | null = '';
+  leagueName = signal<string>('');
+  leagueSeason = signal<string>('');
+  leagueLogo = signal<string>('');
 
   constructor(
     private api: Api,
@@ -32,7 +35,12 @@ export class League implements OnInit {
       if (!this.leagueId || !this.seasonId) return;
 
       this.api.getTable(this.leagueId, this.seasonId).subscribe((data: any) => {
-      this.table.set(data.data.response[0].league.standings[0]);
+        const league = data.data.response[0].league;
+
+          this.leagueName.set(league.name);
+          this.leagueSeason.set(league.season.toString());
+          this.leagueLogo.set(league.logo);
+          this.table.set(league.standings[0]);
       });
 
     });
