@@ -5,21 +5,116 @@ p {
 }
 
 .l-table {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+  width: 900px;
+  max-width: 95%;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 12px;
+  font-family: Arial, sans-serif;
+}
+
+.l-header,
+.l-row {
+  display: grid;
+  grid-template-columns:
+    6px  /* Qualification indicator */
+    70px /* Position */
+    minmax(150px, 2fr) /* Team */
+    repeat(7, minmax(55px, 1fr));
   align-items: center;
-  flex-direction: column;
+  text-align: center;
+}
+
+.l-header {
+  background-color: #182e6f;
+  color: white;
+  font-weight: bold;
+  padding: 15px 10px;
 }
 
 .l-row {
-  background-color: gray;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 12px 10px;
+  min-height: 20px;
+}
 
-  width: 800px;
-  min-height: 15px;
-  border-radius: 0px;
+.l-row:nth-child(even) {
+  background-color: #eeeeee;
+}
+
+.l-row:nth-child(odd) {
+  background-color: #d6d6d6;
+}
+
+.team-name {
+  text-align: left;
+}
+
+.team-name button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: inherit;
+  color: #182e6f;
+  font-weight: bold;
+}
+
+.team-name button:hover {
+  text-decoration: underline;
+}
+
+.points,
+.played,
+.win,
+.draw,
+.lose,
+.gf {
+  position: relative;
+}
+
+.points {
+  left: 120px;
+}
+
+.played {
+  left: 120px;
+}
+
+.win {
+  left: 120px;
+}
+
+.draw {
+  left: 80px;
+}
+
+.lose {
+  left: 40px;
+}
+
+.gf {
+  left: 40px;
+}
+
+.ga {
+  left: 0px;
+}
+
+.qualification {
+  width: 6px;
+  height: 100%;
+  min-height: 44px;
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.qualification.ucl {
+  background-color: #246bce;
+}
+
+.qualification.europa {
+  background-color: #f28c28;
+}
+
+.qualification.conference {
+  background-color: #28a45b;
 }

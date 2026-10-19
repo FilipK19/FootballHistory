@@ -1,22 +1,51 @@
 <div class="buttons">
-    <button [routerLink]="['/league', leagueId, seasonId, 'matches']">Matches</button>
+  <button [routerLink]="['/league', leagueId, seasonId, 'matches']">Matches</button>
 
-    <button [routerLink]="['/leagueinfo', leagueId]">League Info</button>
+  <button [routerLink]="['/leagueinfo', leagueId]">League Info</button>
 </div>
 
 <div class="l-table">
-  <p>Position   |     Points    |   matches played    |   win   |   draw    |   lose    |   goals for   |   goals against</p>
+  <div class="l-header">
+    <div></div>
+    <!-- Qualification color -->
+    <div>Position</div>
+    <div></div>
+    <!-- Team name -->
+    <div class="points">Points</div>
+    <div class="played">Played</div>
+    <div class="win">Win</div>
+    <div class="draw">Draw</div>
+    <div class="lose">Lose</div>
+    <div class="gf">GF</div>
+    <div class="ga">GA</div>
+  </div>
+
   @for (team of table(); track team.team.id) {
     <div class="l-row">
-      <div class="left-row">
-        {{ team.rank }} - <button [routerLink]="['/clubinfo', team.team.name]">{{ team.team.name }}</button>
+      <div
+        class="qualification"
+        [class.ucl]="team.rank <= 4"
+        [class.europa]="team.rank === 5"
+        [class.conference]="team.rank === 6"
+      ></div>
+
+      <div>{{ team.rank }}</div>
+
+      <div class="team-name">
+        <button [routerLink]="['/clubinfo', team.team.name]">
+          {{ team.team.name }}
+        </button>
       </div>
-      
-      <div class="right-row">
-        {{ team.points }} |
-        {{ team.all.played }} {{ team.all.win }} {{ team.all.draw }} {{ team.all.lose }} |
-        {{ team.all.goals.for }} {{ team.all.goals.against }}
-      </div>
-    </div>}
+
+      <div class="points">{{ team.points }}</div>
+      <div class="played">{{ team.all.played }}</div>
+      <div class="win">{{ team.all.win }}</div>
+      <div class="draw">{{ team.all.draw }}</div>
+      <div class="lose">{{ team.all.lose }}</div>
+      <div class="gf">{{ team.all.goals.for }}</div>
+      <div class="ga">{{ team.all.goals.against }}</div>
+    </div>
+  }
 </div>
+
 <p>League ID: {{ leagueId }}</p>
