@@ -4,6 +4,7 @@ p {
   color: #333;
 }
 
+/* League table */
 .l-table {
   width: 900px;
   max-width: 95%;
@@ -62,6 +63,7 @@ p {
   text-decoration: underline;
 }
 
+/* League table columns */
 .points,
 .played,
 .win,
@@ -98,7 +100,7 @@ p {
 .ga {
   left: 0px;
 }
-
+/* Team qualification indicator */
 .qualification {
   width: 6px;
   height: 100%;
@@ -117,4 +119,31 @@ p {
 
 .qualification.conference {
   background-color: #28a45b;
+}
+
+/* League name and logo */
+.league_logo {
+  width: 50px;
+  height: 50px;
+}
+
+.league-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0px;
+  font-family: 'Cinzel', serif;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-left: 10px;
+  margin-bottom: 15px;
 }
