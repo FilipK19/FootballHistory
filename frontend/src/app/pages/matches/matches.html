@@ -1,21 +1,22 @@
- <!-- {{mdata() | json}} -->
+<!-- {{mdata() | json}} -->
 
 <div class="match-group">
-    @for (group of groupedMatches(); track group[0]) {
+  @for (group of groupedMatches(); track group[0]) {
+    <h2>{{ group[0] }}</h2>
 
-        <h2>{{ group[0] }}</h2>
-
-        @for (match of group[1]; track match.fixture.id) {
-            <button
-                class="match-button"
-                [routerLink]="['/league', leagueId, seasonId, 'matches', match.fixture.id]">
-                {{ match.teams.home.name }}
-                {{ match.score.fulltime.home }} -
-                {{ match.score.fulltime.away }}
-                {{ match.teams.away.name }}
-            </button>
-        }
-
-        <hr>
+    @for (match of group[1]; track match.fixture.id) {
+      <button
+        class="match-button"
+        [routerLink]="['/league', leagueId, seasonId, 'matches', match.fixture.id]"
+      >
+        <img class="league_logo" [src]="match.league.logo" alt="League Logo" />
+        {{ match.teams.home.name }}
+        {{ match.score.fulltime.home }} -
+        {{ match.score.fulltime.away }}
+        {{ match.teams.away.name }}
+      </button>
     }
+
+    <hr />
+  }
 </div>
